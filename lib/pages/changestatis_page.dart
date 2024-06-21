@@ -7,6 +7,7 @@ import 'reguser1_name_.dart';
 
 class chagestatus extends StatefulWidget {
   final int data;
+
   chagestatus({required this.data});
 
   @override
@@ -17,14 +18,17 @@ class chagestatus extends StatefulWidget {
 class _changestatusForm extends State<chagestatus> {
   String strData = '';
   String status = 'Юр лицо';
-  //int strRol = widget.data;
+  late int RolNum;
+
   @override
   void initState() {
     super.initState();
     if (widget.data == 1) {
       strData = 'заказчика';
+      RolNum = 1;
     } else if (widget.data == 2) {
       strData = 'грузоперевозчика';
+      RolNum = 2;
     }
   }
 
@@ -116,12 +120,21 @@ class _changestatusForm extends State<chagestatus> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    if (_value == 2)
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => creguser1_name()));
-                    if (_value == 1)
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => creguser1_name_()));
+                    int StatNum = _value;
+                    if (_value == 2) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Creguser1_Name(
+                                  RolNum: RolNum, StatNum: StatNum)));
+                    }
+                    if (_value == 1) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => creguser1_name_(
+                                  RolNum: RolNum, StatNum: StatNum)));
+                    }
                   },
                 ),
               ),

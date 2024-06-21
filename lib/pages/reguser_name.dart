@@ -173,7 +173,7 @@ class _creguser_nameForm extends State<creguser_name> {
                 ),
               ),
             ),
-                        Container(
+            Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 15.0),
@@ -205,7 +205,7 @@ class _creguser_nameForm extends State<creguser_name> {
                 ),
               ),
             ),
-                        Container(
+            Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 15.0),
@@ -253,13 +253,12 @@ class _creguser_nameForm extends State<creguser_name> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => creguser2_name()));                    
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => creguser2_name()));
                   },
                 ),
               ),
             ),
-     
           ],
         ),
       ),
