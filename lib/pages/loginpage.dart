@@ -7,6 +7,7 @@ import 'package:crgtransp72app/pages/changerol_page.dart';
 import 'package:flutter/material.dart';
 
 import '../design/dimension.dart';
+import 'cities.dart';
 import 'gruz_vodit.dart';
 //import 'profil_page.dart';
 import 'vod_zak.dart';
@@ -122,6 +123,27 @@ class _LoginState extends State<LoginPage> {
                       print(login);
                       print(password);
                       signup(login, password);
+                    }),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              margin: EdgeInsets.only(top: 20.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                    child: const Text('cites'),
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: blueaccentColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => MyAppCities()));
                     }),
               ),
             ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../design/colors.dart';
 import '../design/dimension.dart';
 import 'reguser1_name.dart';
-import 'reguser1_name_.dart';
 
 class chagestatus extends StatefulWidget {
   final int data;
@@ -18,7 +17,7 @@ class chagestatus extends StatefulWidget {
 class _changestatusForm extends State<chagestatus> {
   String strData = '';
   String status = 'Юр лицо';
-  late int RolNum;
+  int RolNum = 1;
 
   @override
   void initState() {
@@ -38,6 +37,23 @@ class _changestatusForm extends State<chagestatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text('Выбор статуса',
+                style: TextStyle(
+                  color: whiteprColor,
+                  fontSize: fontSize30,
+                )),
+            Text('$strData',
+                style: TextStyle(color: whiteprColor, fontSize: 24)),
+          ],
+        ),
+        toolbarHeight: 72, // Опционально: регулировка высоты AppBar
+        backgroundColor: blueaccentColor,
+      ),
+      /*       appBar: AppBar(
         title: Text(
           "Выбор статуса $strData",
           style: TextStyle(
@@ -45,7 +61,7 @@ class _changestatusForm extends State<chagestatus> {
           ),
         ),
         backgroundColor: blueaccentColor,
-      ),
+      ),*/
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -76,7 +92,7 @@ class _changestatusForm extends State<chagestatus> {
                           blueaccentColor, // Change the active radio button color here
                       fillColor: MaterialStateProperty.all(
                           blueaccentColor), // Change the fill color when selected
-                      splashRadius: 20, // Change the splash radius when clicked
+                      splashRadius: 25, // Change the splash radius when clicked
                       onChanged: (int? value) {
                         setState(() {
                           _value = value!;
@@ -132,7 +148,7 @@ class _changestatusForm extends State<chagestatus> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => creguser1_name_(
+                              builder: (context) => Creguser1_Name(
                                   RolNum: RolNum, StatNum: StatNum)));
                     }
                   },
