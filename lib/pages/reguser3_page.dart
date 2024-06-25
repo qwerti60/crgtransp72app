@@ -4,20 +4,31 @@ import '../design/colors.dart';
 import '../design/dimension.dart';
 
 import 'reguser_name_.dart';
+//class creguser3_name extends StatefulWidget {
 
-class creguser3_name extends StatefulWidget {
-  const creguser3_name({super.key});
+class creguser3_name extends StatelessWidget {
+  final int rollNum;
+  final int statNum;
+  final String firstName;
+  final String lastName;
+  final String middleName;
+  final String city;
 
-  @override
+  creguser3_name(
+      {required this.rollNum,
+      required this.statNum,
+      required this.firstName,
+      required this.lastName,
+      required this.middleName,
+      required this.city,
+      required int rolNum});
 
-  // ignore: library_private_types_in_public_api
-
-  _creguser3_nameForm createState() => _creguser3_nameForm();
-}
-
-class _creguser3_nameForm extends State<creguser3_name> {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _phoneController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -45,6 +56,12 @@ class _creguser3_nameForm extends State<creguser3_name> {
                   color: blackprColor,
                   fontSize: fontSize30,
                 )),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              margin: EdgeInsets.only(top: 5.0),
+              child: Text('City: $city'),
+            ),
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -159,10 +176,10 @@ class _creguser3_nameForm extends State<creguser3_name> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => creguser_name_()));
-                  },                ),
+                  },
+                ),
               ),
             ),
-     
           ],
         ),
       ),

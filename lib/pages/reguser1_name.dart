@@ -16,6 +16,7 @@ class Creguser1_Name extends StatefulWidget {
 
   final int RolNum;
   final int StatNum;
+  //String city  = '';
   //final String strData;
 
   @override
@@ -28,9 +29,12 @@ class Creguser1_Name extends StatefulWidget {
 class _Creguser1_NameForm extends State<Creguser1_Name> {
   List _cities = [];
   String? _selectedCity;
+
   late int rolNum;
   late int statNum;
   String strData = '';
+  String city = '';
+
   @override
   void initState() {
     super.initState();
@@ -57,9 +61,9 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
     }
   }
 
-  final TextEditingController _surnameController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _patronymicController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _middleNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
 //  String? _selectedCity;
 
   @override
@@ -117,7 +121,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _nameController,
+                controller: _firstNameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -150,7 +154,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _patronymicController,
+                controller: _middleNameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -183,7 +187,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _surnameController,
+                controller: _lastNameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -277,8 +281,38 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => creguser3_name()));
+                    String firstName = _firstNameController.text;
+                    String middleName = _middleNameController.text;
+                    String lastName = _lastNameController.text;
+
+                    if (firstName.isEmpty ||
+                        middleName.isEmpty ||
+                        lastName.isEmpty ||
+                        _selectedCity == null) {
+// Если хотя бы одно поле пустое, показываем осведомительное сообщение
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Пожалуйста, заполните все поля и выберите город.'),
+                        ),
+                      );
+                    } else {
+// Все поля заполнены, переходим на следующую страницу
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => creguser3_name(
+                            rolNum: rolNum,
+                            statNum: statNum,
+                            firstName: firstName,
+                            middleName: middleName,
+                            lastName: lastName,
+                            city: _selectedCity!,
+                            rollNum: rolNum,
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
               ),

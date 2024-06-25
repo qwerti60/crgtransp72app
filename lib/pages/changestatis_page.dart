@@ -137,20 +137,11 @@ class _changestatusForm extends State<chagestatus> {
                   ),
                   onPressed: () {
                     int StatNum = _value;
-                    if (_value == 2) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Creguser1_Name(
-                                  RolNum: RolNum, StatNum: StatNum)));
-                    }
-                    if (_value == 1) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Creguser1_Name(
-                                  RolNum: RolNum, StatNum: StatNum)));
-                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Creguser1_Name(
+                                RolNum: RolNum, StatNum: StatNum)));
                   },
                 ),
               ),

@@ -5,7 +5,6 @@ import '../design/dimension.dart';
 
 import 'reguser4_page_.dart';
 
-
 class creguser3_name_ extends StatefulWidget {
   const creguser3_name_({super.key});
 
@@ -160,11 +159,10 @@ class _creguser3_nameForm extends State<creguser3_name_> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => creguser4_name_()));
-                  },                
-                  ),
+                  },
+                ),
               ),
             ),
-     
           ],
         ),
       ),
