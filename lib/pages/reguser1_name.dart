@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config.dart';
 import '../design/colors.dart';
 import '../design/dimension.dart';
 import 'reguser3_page.dart';
@@ -50,7 +51,9 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
   }
 
   Future _fetchCities() async {
-    final response = await http.get(Uri.parse('https://ivnovav.ru/cities.php'));
+    final response =
+        await http.get(Uri.parse(Config.baseUrl).replace(path: 'cities.php'));
+    //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
 
     if (response.statusCode == 200) {
       setState(() {

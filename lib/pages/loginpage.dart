@@ -143,7 +143,7 @@ class _LoginState extends State<LoginPage> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => MyAppCities()));
+                          MaterialPageRoute(builder: (_) => RegisterPage()));
                     }),
               ),
             ),
