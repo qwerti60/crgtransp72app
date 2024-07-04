@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../design/colors.dart';
 import '../design/dimension.dart';
 
-import 'reguser_name_.dart';
+import 'loginpage.dart';
+import 'reguser4_page_.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -178,7 +179,8 @@ class creguser3_name extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              margin: EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
@@ -196,7 +198,10 @@ class creguser3_name extends StatelessWidget {
                   ),
                   onPressed: () async {
                     bool _validateEmail(String email) {
-                      final RegExp regex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                      // Регулярное выражение для синтаксической проверки email
+                      String pattern =
+                          r'^[a-zA-Z0-9]+([._\-\+]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\.[a-zA-Z]{2,})+$';
+                      RegExp regex = RegExp(pattern);
                       return regex.hasMatch(email);
                     }
 
@@ -211,38 +216,36 @@ class creguser3_name extends StatelessWidget {
                       return regex.hasMatch(password);
                     }
 
-                    if (rollNum == 1 && statNum == 2) {
-                      String phone = _phoneController.text;
-                      String email = _emailController.text;
-                      String password = _passwordController.text;
+                    String phone = _phoneController.text;
+                    String email = _emailController.text;
+                    String password = _passwordController.text;
 
-                      if (phone.isEmpty ||
-                          email.isEmpty ||
-                          password.isEmpty == null) {
+                    if (phone.isEmpty ||
+                        email.isEmpty ||
+                        password.isEmpty == null) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'Пожалуйста, заполните все поля и выберите город.'),
-                          ),
-                        );
-                        return;
-                      } else if (!_validatePhone(phone)) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text('Введите корректный номер телефона')));
-                        return;
-                      } else if (!_validateEmail(email)) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Введите корректный email')));
-                        return;
-                      } else if (!_validatePassword(password)) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                'Пароль должен быть не менее 8 символов, содержать буквы и цифры')));
-                        return;
-                      }
-
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Пожалуйста, заполните все поля и выберите город.'),
+                        ),
+                      );
+                      return;
+                    } else if (!_validatePhone(phone)) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Введите корректный номер телефона')));
+                      return;
+                    } else if (!_validateEmail(email)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Введите корректный email')));
+                      return;
+                    } else if (!_validatePassword(password)) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              'Пароль должен быть не менее 8 символов, содержать буквы и цифры')));
+                      return;
+                    }
+                    if (rollNum == 1 && statNum == 2) {
                       final response = await http.post(
                         Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
                         body: json.encode({
@@ -272,6 +275,25 @@ class creguser3_name extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Регистрация успешна')));
                       }
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => LoginPage()));
+                    }
+                    if (rollNum == 1 && statNum == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => creguser4_name_(
+                              rollNum: rollNum,
+                              statNum: statNum,
+                              firstName: firstName,
+                              middleName: middleName,
+                              lastName: lastName,
+                              city: city,
+                              phone: phone,
+                              email: email,
+                              password: password),
+                        ),
+                      );
                     }
                   },
                 ),

@@ -6,10 +6,21 @@ import '../design/dimension.dart';
 //import 'reguser1_name_.dart';
 
 import 'reguser2_page_.dart';
+
 String dropdownValue = 'Тентовый';
 
 class creguser_name_ extends StatefulWidget {
-  const creguser_name_({super.key});
+  const creguser_name_(
+      {super.key,
+      required rollNum,
+      required statNum,
+      required firstName,
+      required middleName,
+      required lastName,
+      required city,
+      required phone,
+      required email,
+      required password});
 
   @override
 
@@ -176,7 +187,7 @@ class _creguser_nameForm extends State<creguser_name_> {
                 ),
               ),
             ),
-                        Container(
+            Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 15.0),
@@ -208,7 +219,7 @@ class _creguser_nameForm extends State<creguser_name_> {
                 ),
               ),
             ),
-                        Container(
+            Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 15.0),
@@ -307,13 +318,12 @@ class _creguser_nameForm extends State<creguser_name_> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => creguser2_name_()));                    
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => creguser2_name_()));
                   },
                 ),
               ),
             ),
-     
           ],
         ),
       ),

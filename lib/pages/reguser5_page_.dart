@@ -11,8 +11,33 @@ import 'reguser_name_.dart';
 String dropdownValue = 'Мини погрузчики и складская техника';
 
 class creguser5_name_ extends StatefulWidget {
-  const creguser5_name_({super.key});
+  final int rollNum;
+  final int statNum;
+  final String firstName;
+  final String lastName;
+  final String middleName;
+  final String city;
+  final String email;
+  final String phone;
+  final String password;
+  final String namefirm;
+  final String innStr;
+  final String ogrnStr;
 
+  const creguser5_name_(
+      {super.key,
+      required this.rollNum,
+      required this.statNum,
+      required this.firstName,
+      required this.lastName,
+      required this.middleName,
+      required this.city,
+      required this.email,
+      required this.phone,
+      required this.password,
+      required this.namefirm,
+      required this.ogrnStr,
+      required this.innStr});
   @override
 
   // ignore: library_private_types_in_public_api
@@ -21,6 +46,39 @@ class creguser5_name_ extends StatefulWidget {
 }
 
 class _creguser5_nameForm extends State<creguser5_name_> {
+  late int statNum;
+  late int rollNum;
+  late String firstName;
+  late String middleName;
+  late String lastName;
+  late String city;
+  late String phone;
+  late String email;
+  late String password;
+  late String namefirm;
+  late String innStr;
+  late String ogrnStr;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Инициализация переменных значениями, переданными через виджет
+    statNum = widget.statNum;
+    rollNum = widget.rollNum;
+    firstName = widget.firstName;
+    middleName = widget.middleName;
+    lastName = widget.lastName;
+    city = widget.city;
+    phone = widget.phone;
+    email = widget.email;
+    password = widget.password;
+    namefirm = widget.namefirm;
+    innStr = widget.innStr;
+    ogrnStr = widget.ogrnStr;
+  }
+
+  final TextEditingController _vidSpecTechController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,8 +207,8 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => creguser_name_()));
+                    //  Navigator.push(context,
+                    //    MaterialPageRoute(builder: (_) => creguser_name_()));
                   },
                 ),
               ),

@@ -5,10 +5,29 @@ import '../design/dimension.dart';
 import 'reguser5_page_.dart';
 
 class creguser4_name_ extends StatefulWidget {
-  const creguser4_name_({super.key});
+  final int statNum;
+  final int rollNum;
+  final String firstName;
+  final String middleName;
+  final String lastName;
+  final String city;
+  final String phone;
+  final String email;
+  final String password;
+
+  const creguser4_name_({
+    required this.statNum,
+    required this.rollNum,
+    required this.firstName,
+    required this.middleName,
+    required this.lastName,
+    required this.city,
+    required this.phone,
+    required this.email,
+    required this.password,
+  });
 
   @override
-
   // ignore: library_private_types_in_public_api
 
   _creguser4_nameForm createState() => _creguser4_nameForm();
@@ -17,6 +36,36 @@ class creguser4_name_ extends StatefulWidget {
 class _creguser4_nameForm extends State<creguser4_name_> {
   @override
   Widget build(BuildContext context) {
+    late int statNum;
+    late int rollNum;
+    late String firstName;
+    late String middleName;
+    late String lastName;
+    late String city;
+    late String phone;
+    late String email;
+    late String password;
+
+    @override
+    void initState() {
+      super.initState();
+
+      // Инициализация переменных значениями, переданными через виджет
+      statNum = widget.statNum;
+      rollNum = widget.rollNum;
+      firstName = widget.firstName;
+      middleName = widget.middleName;
+      lastName = widget.lastName;
+      city = widget.city;
+      phone = widget.phone;
+      email = widget.email;
+      password = widget.password;
+    }
+
+    final TextEditingController _nameController = TextEditingController();
+    final TextEditingController _innController = TextEditingController();
+    final TextEditingController _kppController = TextEditingController();
+    final TextEditingController _ogrnController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -62,6 +111,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _nameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -94,6 +144,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _innController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -126,6 +177,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _kppController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -140,7 +192,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                 ),
               ),
             ),
-                        Container(
+            Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 15.0),
@@ -158,6 +210,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _ogrnController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -188,13 +241,30 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => creguser5_name_()));
-                  },                
-                  ),
+                    String innStr = _innController.text;
+                    String ogrnStr = _ogrnController.text;
+                    String namefirm = _nameController.text;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => creguser5_name_(
+                                  rollNum: rollNum,
+                                  statNum: statNum,
+                                  firstName: firstName,
+                                  middleName: middleName,
+                                  lastName: lastName,
+                                  city: city,
+                                  phone: phone,
+                                  email: email,
+                                  password: password,
+                                  namefirm: namefirm,
+                                  innStr: innStr,
+                                  ogrnStr: ogrnStr,
+                                )));
+                  },
+                ),
               ),
             ),
-     
           ],
         ),
       ),
