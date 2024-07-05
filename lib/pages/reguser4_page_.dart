@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-
 import '../design/colors.dart';
 import '../design/dimension.dart';
+import 'loginpage.dart';
 import 'reguser5_page_.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../config.dart';
 
 class creguser4_name_ extends StatefulWidget {
   final int statNum;
@@ -34,34 +38,32 @@ class creguser4_name_ extends StatefulWidget {
 }
 
 class _creguser4_nameForm extends State<creguser4_name_> {
+  late int statNum;
+  late int rollNum;
+  late String firstName;
+  late String middleName;
+  late String lastName;
+  late String city;
+  late String phone;
+  late String email;
+  late String password;
   @override
+  void initState() {
+    super.initState();
+
+    // Инициализация переменных значениями, переданными через виджет
+    statNum = widget.statNum;
+    rollNum = widget.rollNum;
+    firstName = widget.firstName;
+    middleName = widget.middleName;
+    lastName = widget.lastName;
+    city = widget.city;
+    phone = widget.phone;
+    email = widget.email;
+    password = widget.password;
+  }
+
   Widget build(BuildContext context) {
-    late int statNum;
-    late int rollNum;
-    late String firstName;
-    late String middleName;
-    late String lastName;
-    late String city;
-    late String phone;
-    late String email;
-    late String password;
-
-    @override
-    void initState() {
-      super.initState();
-
-      // Инициализация переменных значениями, переданными через виджет
-      statNum = widget.statNum;
-      rollNum = widget.rollNum;
-      firstName = widget.firstName;
-      middleName = widget.middleName;
-      lastName = widget.lastName;
-      city = widget.city;
-      phone = widget.phone;
-      email = widget.email;
-      password = widget.password;
-    }
-
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _innController = TextEditingController();
     final TextEditingController _kppController = TextEditingController();
@@ -231,7 +233,9 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
+                  child: Text(rollNum == 1 && statNum == 1
+                      ? 'Регистрация'
+                      : 'Продолжить'), //                 child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -244,23 +248,94 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                     String innStr = _innController.text;
                     String ogrnStr = _ogrnController.text;
                     String namefirm = _nameController.text;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => creguser5_name_(
-                                  rollNum: rollNum,
-                                  statNum: statNum,
-                                  firstName: firstName,
-                                  middleName: middleName,
-                                  lastName: lastName,
-                                  city: city,
-                                  phone: phone,
-                                  email: email,
-                                  password: password,
-                                  namefirm: namefirm,
-                                  innStr: innStr,
-                                  ogrnStr: ogrnStr,
-                                )));
+                    String kppStr = _kppController.text;
+                    bool _isNumeric(String str) {
+                      return RegExp(r'^[0-9]+$').hasMatch(str);
+                    }
+
+                    if (rollNum == 1 && statNum == 1) {
+                      if (namefirm.isEmpty ||
+                          ogrnStr.isEmpty ||
+                          kppStr.isEmpty ||
+                          innStr.isEmpty == null) {
+// Если хотя бы одно поле пустое, показываем осведомительное сообщение
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Пожалуйста, заполните все поля'),
+                          ),
+                        );
+                        return;
+                      } else if (!_isNumeric(innStr) ||
+                          !_isNumeric(ogrnStr) ||
+                          !_isNumeric(kppStr)) {
+// Если хотя бы одно поле пустое, показываем осведомительное сообщение
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'ИНН, ОГОН, КПП должны содержать только цифры'),
+                          ),
+                        );
+                        return;
+                      }
+                      Future register() async {
+                        final response = await http.post(
+                          Uri.parse(Config.baseUrl).replace(path: 'regul.php'),
+                          body: {
+                            'rollNum': rollNum.toString(),
+                            'statNum': statNum.toString(),
+                            'firstName': firstName,
+                            'middleName': middleName,
+                            'lastName': lastName,
+                            'city': city,
+                            'phone': phone,
+                            'email': email,
+                            'password': password,
+                            'namefirm': namefirm,
+                            'innStr': innStr,
+                            'ogrnStr': ogrnStr,
+                            'kppStr': kppStr,
+                          },
+                        );
+
+                        if (response.statusCode == 200) {
+                          print(response.body);
+                          final data = json.decode(response.body);
+
+                          if (data['status'] == 'success') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Регистрация успешна!')));
+// Перейти на экран авторизации
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => LoginPage()));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Ошибка: ${data['message']}')));
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Ошибка сервера')));
+                        }
+                      }
+
+                      register();
+                    } else
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser5_name_(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                  )));
                   },
                 ),
               ),

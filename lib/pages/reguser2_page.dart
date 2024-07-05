@@ -4,8 +4,34 @@ import '../design/colors.dart';
 import '../design/dimension.dart';
 
 class creguser2_name extends StatefulWidget {
-  const creguser2_name({super.key});
+  final int statNum;
+  final int rollNum;
+  final String firstName;
+  final String middleName;
+  final String lastName;
+  final String city;
+  final String phone;
+  final String email;
+  final String password;
+  final String namefirm;
+  final String innStr;
+  final String ogrnStr;
+  final String vidt;
 
+  const creguser2_name(
+      {required this.statNum,
+      required this.rollNum,
+      required this.firstName,
+      required this.middleName,
+      required this.lastName,
+      required this.city,
+      required this.phone,
+      required this.email,
+      required this.password,
+      required this.namefirm,
+      required this.ogrnStr,
+      required this.innStr,
+      required this.vidt});
   @override
 
   // ignore: library_private_types_in_public_api
@@ -158,7 +184,6 @@ class _creguser2_nameForm extends State<creguser2_name> {
                 ),
               ),
             ),
-     
           ],
         ),
       ),

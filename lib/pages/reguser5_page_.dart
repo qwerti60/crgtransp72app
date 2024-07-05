@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 import '../design/dimension.dart';
+import '../config.dart';
 
-import 'reguser_name_.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'reguser_name.dart';
 
 //import 'reguser2_page_.dart';
 
@@ -46,6 +50,8 @@ class creguser5_name_ extends StatefulWidget {
 }
 
 class _creguser5_nameForm extends State<creguser5_name_> {
+  List _vidt = [];
+  String? _selectedVidt;
   late int statNum;
   late int rollNum;
   late String firstName;
@@ -76,9 +82,24 @@ class _creguser5_nameForm extends State<creguser5_name_> {
     namefirm = widget.namefirm;
     innStr = widget.innStr;
     ogrnStr = widget.ogrnStr;
+
+    _fetchVidT();
   }
 
-  final TextEditingController _vidSpecTechController = TextEditingController();
+  Future _fetchVidT() async {
+    final response =
+        await http.get(Uri.parse(Config.baseUrl).replace(path: 'vidt.php'));
+    //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _vidt = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load cities');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,72 +145,52 @@ class _creguser5_nameForm extends State<creguser5_name_> {
             ),
             Container(
               height: 60,
-              width: double.infinity - 20,
-
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black38, width: 3),
-                color: Colors.black38,
+                border: Border.all(color: Colors.black38, width: 2),
+                color: grayprprColor,
               ),
 // Step 2.
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButton<String>(
-                  // Step 3.
-                  value: dropdownValue,
-                  isExpanded: true,
-                  underline: Container(),
-
-                  alignment: Alignment.bottomCenter,
-
-                  elevation: 0,
-                  dropdownColor: grayprprColor,
-                  // Step 4.
-                  items: <String>[
-                    'Мини погрузчики и складская техника',
-                    'Мини экскаваторы',
-                    'Мусоровозы, бункеровозы и ломовозы',
-                    'Тралы и низкорамные платформы',
-                    'Комунально-дорожные машины',
-                    'Самосвалы и тонары',
-                    'Тракторы и сельхоз иехника',
-                    'Фронтальные и телескопические погрузчики',
-                    'Эвакуаторы и автовозы',
-                    'Эксковаторы',
-                    'Эксковаторы-погрузчики',
-                    'Ямобуры и сваебои',
-                    'Бульдозеры',
-                    'Гидромолоты',
-                    'Грейдеры',
-                    'Грейферные погрузчики',
-                    'Дорожные катки и асфальтоукладчики',
-                    'Манипуляторы',
-                    'Автобетононасосы',
-                    'Автовышки',
-                    'Ассенизаторы и илососы',
-                    'Бензовозы и автоцистерны',
-                    'Бероновозы и цементовозы'
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value.toString(),
-                      child: Text(
-                        value,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black38,
-                          fontSize: 16.0,
+              child: _vidt.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownButton(
+                          hint: Text(
+                            'Выберите вид спецтехники',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black38,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          dropdownColor: grayprprColor,
+                          value: _selectedVidt,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedVidt = newValue;
+                            });
+                          },
+                          items: _vidt
+                              .map<DropdownMenuItem<String>>((dynamic vidt) {
+                            return DropdownMenuItem(
+                              value: vidt['name'],
+                              child: Text(
+                                vidt['name'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black38,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                  // Step 5.
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                ),
-              ),
+                      ],
+                    ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -207,8 +208,25 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    //  Navigator.push(context,
-                    //    MaterialPageRoute(builder: (_) => creguser_name_()));
+                    // String namefirm = _nameController.text;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => creguser_name(
+                                  rollNum: rollNum,
+                                  statNum: statNum,
+                                  firstName: firstName,
+                                  middleName: middleName,
+                                  lastName: lastName,
+                                  city: city,
+                                  phone: phone,
+                                  email: email,
+                                  password: password,
+                                  namefirm: namefirm,
+                                  innStr: innStr,
+                                  ogrnStr: ogrnStr,
+                                  vidt: _selectedVidt!,
+                                )));
                   },
                 ),
               ),
