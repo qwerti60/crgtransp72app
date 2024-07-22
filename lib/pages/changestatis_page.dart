@@ -28,6 +28,9 @@ class _changestatusForm extends State<chagestatus> {
     } else if (widget.data == 2) {
       strData = 'грузоперевозчика';
       RolNum = 2;
+    } else if (widget.data == 3) {
+      strData = 'усл. спецтехн';
+      RolNum = 3;
     }
   }
 

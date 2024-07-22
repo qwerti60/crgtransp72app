@@ -51,8 +51,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
   }
 
   Future _fetchCities() async {
-    final response =
-        await http.get(Uri.parse(Config.baseUrl).replace(path: 'cities.php'));
+    final response = await http
+        .get(Uri.parse(Config.baseUrl).replace(path: '/api/cities.php'));
     //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
 
     if (response.statusCode == 200) {

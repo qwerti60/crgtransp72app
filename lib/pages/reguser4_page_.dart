@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../config.dart';
+import 'reguser_name.dart';
 
 class creguser4_name_ extends StatefulWidget {
   final int statNum;
@@ -253,6 +254,49 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                       return RegExp(r'^[0-9]+$').hasMatch(str);
                     }
 
+                    //перевозчик юр лицо
+                    if (rollNum == 2 && statNum == 1) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser_name(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                    kppStr: kppStr,
+                                    vidt: '',
+                                  )));
+                    }
+                    if (rollNum == 3 && statNum == 1) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser5_name_(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                    kppStr: kppStr,
+                                  )));
+                    }
+                    //заказчик юр лицо
                     if (rollNum == 1 && statNum == 1) {
                       if (namefirm.isEmpty ||
                           ogrnStr.isEmpty ||
@@ -279,7 +323,8 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                       }
                       Future register() async {
                         final response = await http.post(
-                          Uri.parse(Config.baseUrl).replace(path: 'regul.php'),
+                          Uri.parse(Config.baseUrl)
+                              .replace(path: '/api/regul.php'),
                           body: {
                             'rollNum': rollNum.toString(),
                             'statNum': statNum.toString(),
@@ -318,24 +363,7 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                       }
 
                       register();
-                    } else
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => creguser5_name_(
-                                    rollNum: rollNum,
-                                    statNum: statNum,
-                                    firstName: firstName,
-                                    middleName: middleName,
-                                    lastName: lastName,
-                                    city: city,
-                                    phone: phone,
-                                    email: email,
-                                    password: password,
-                                    namefirm: namefirm,
-                                    innStr: innStr,
-                                    ogrnStr: ogrnStr,
-                                  )));
+                    }
                   },
                 ),
               ),

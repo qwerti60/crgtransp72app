@@ -1,3 +1,3 @@
 class Config {
-  static const String baseUrl = 'https://ivnovav.ru/';
+  static const String baseUrl = 'https://ivnovav.ru';
 }

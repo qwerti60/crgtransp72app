@@ -10,6 +10,7 @@ import '../design/dimension.dart';
 import 'cities.dart';
 import 'gruz_vodit.dart';
 //import 'profil_page.dart';
+import 'register_screen.dart';
 import 'vod_zak.dart';
 import 'zprofil_page.dart';
 import 'package:http/http.dart' as http;
@@ -143,7 +144,7 @@ class _LoginState extends State<LoginPage> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => RegisterPage()));
+                          MaterialPageRoute(builder: (_) => RegisterScreen()));
                     }),
               ),
             ),

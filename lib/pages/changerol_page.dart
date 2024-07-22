@@ -81,6 +81,23 @@ class _changerolForm extends State<changerol> {
                       },
                     ),
                   ),
+                  ListTile(
+                    title: const Text('Услуги спецтехники'),
+                    leading: Radio<int>(
+                      value: 3,
+                      groupValue: _valueRole,
+                      activeColor:
+                          blueaccentColor, // Change the active radio button color here
+                      fillColor: MaterialStateProperty.all(
+                          blueaccentColor), // Change the fill color when selected
+                      splashRadius: 25, // Change the splash radius when clicked
+                      onChanged: (int? value) {
+                        setState(() {
+                          _valueRole = value!;
+                        });
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

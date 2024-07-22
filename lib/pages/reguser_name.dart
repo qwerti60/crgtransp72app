@@ -4,6 +4,10 @@ import '../design/colors.dart';
 import '../design/dimension.dart';
 //import 'reguser1_name.dart';
 import 'reguser2_page.dart';
+import '../config.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class creguser_name extends StatefulWidget {
   final int statNum;
@@ -18,6 +22,7 @@ class creguser_name extends StatefulWidget {
   final String namefirm;
   final String innStr;
   final String ogrnStr;
+  final String kppStr;
   final String vidt;
 
   const creguser_name(
@@ -33,6 +38,7 @@ class creguser_name extends StatefulWidget {
       required this.namefirm,
       required this.ogrnStr,
       required this.innStr,
+      required this.kppStr,
       required this.vidt});
 
   @override
@@ -43,6 +49,8 @@ class creguser_name extends StatefulWidget {
 }
 
 class _creguser_nameForm extends State<creguser_name> {
+  List _vidk = [];
+  String? _selectedVidk;
   late int statNum;
   late int rollNum;
   late String firstName;
@@ -55,6 +63,7 @@ class _creguser_nameForm extends State<creguser_name> {
   late String namefirm;
   late String innStr;
   late String ogrnStr;
+  late String kppStr;
   late String vidt;
 
   @override
@@ -74,7 +83,24 @@ class _creguser_nameForm extends State<creguser_name> {
     namefirm = widget.namefirm;
     innStr = widget.innStr;
     ogrnStr = widget.ogrnStr;
+    kppStr = widget.kppStr;
     vidt = widget.vidt;
+
+    _fetchVidT();
+  }
+
+  Future _fetchVidT() async {
+    final response = await http
+        .get(Uri.parse(Config.baseUrl).replace(path: '/api/vidk.php'));
+    //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _vidk = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 
   @override
@@ -292,72 +318,52 @@ class _creguser_nameForm extends State<creguser_name> {
             ),
             Container(
               height: 60,
-              width: double.infinity - 20,
-
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black38, width: 3),
-                color: Colors.black38,
+                border: Border.all(color: Colors.black38, width: 2),
+                color: grayprprColor,
               ),
 // Step 2.
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButton<String>(
-                  // Step 3.
-                  //                value: dropdownValue,
-                  isExpanded: true,
-                  underline: Container(),
-
-                  alignment: Alignment.bottomCenter,
-
-                  elevation: 0,
-                  dropdownColor: grayprprColor,
-                  // Step 4.
-                  items: <String>[
-                    'Тентовый',
-                    'Контейнер',
-                    'Фургон',
-                    'Изотермический',
-                    'Рефрижиратор',
-                    'Рефю мультирежимный',
-                    'Реф. тшувоз',
-                    'Бортовой',
-                    'Открытый конт',
-                    'Площадка без бортов',
-                    'Самосвал',
-                    'Шаланда',
-                    'Автотранспортер',
-                    'Бетоновоз',
-                    'Битумовоз',
-                    'Бензовоз',
-                    'Вездеход',
-                    'Газовоз',
-                    'Зерновоз',
-                    'Коневоз',
-                    'Контейнеровоз',
-                    'Бензовозы и автоцистерны',
-                    'Бероновозы и цементовозы'
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value.toString(),
-                      child: Text(
-                        value,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black38,
-                          fontSize: 16.0,
+              child: _vidk.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownButton(
+                          hint: Text(
+                            'Выберите вид кузова',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black38,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          dropdownColor: grayprprColor,
+                          value: _selectedVidk,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedVidk = newValue;
+                            });
+                          },
+                          items: _vidk
+                              .map<DropdownMenuItem<String>>((dynamic vidk) {
+                            return DropdownMenuItem(
+                              value: vidk['name'],
+                              child: Text(
+                                vidk['name'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black38,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                  // Step 5.
-                  onChanged: (String? newValue) {
-                    setState(() {
-//                      dropdownValue = newValue!;
-                    });
-                  },
-                ),
-              ),
+                      ],
+                    ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -375,24 +381,53 @@ class _creguser_nameForm extends State<creguser_name> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => creguser2_name(
-                                  rollNum: rollNum,
-                                  statNum: statNum,
-                                  firstName: firstName,
-                                  middleName: middleName,
-                                  lastName: lastName,
-                                  city: city,
-                                  phone: phone,
-                                  email: email,
-                                  password: password,
-                                  namefirm: namefirm,
-                                  innStr: innStr,
-                                  ogrnStr: ogrnStr,
-                                  vidt: vidt,
-                                )));
+                    /*
+                        final TextEditingController _markaController = TextEditingController();
+    final TextEditingController _godvController = TextEditingController();
+    final TextEditingController _maxgruzkppController = TextEditingController();
+    final TextEditingController _dkuzovController = TextEditingController();
+    final TextEditingController _shkuzovController = TextEditingController();
+                    */
+                    String marka = _markaController.text;
+                    String godv = _godvController.text;
+                    String maxgruz = _maxgruzkppController.text;
+                    String dkuzov = _dkuzovController.text;
+                    String shkuzov = _shkuzovController.text;
+
+                    if (marka.isEmpty == null) {
+// Если хотя бы одно поле пустое, показываем осведомительное сообщение
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Пожалуйста, заполните все поля и выберите вид кузова.'),
+                        ),
+                      );
+                    } else
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser2_name(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                    kppStr: kppStr,
+                                    vidt: vidt,
+                                    godv: godv,
+                                    marka: marka,
+                                    maxgruz: maxgruz,
+                                    dkuzov: dkuzov,
+                                    shkuzov: shkuzov,
+                                    vidk: _selectedVidk!,
+                                  )));
                   },
                 ),
               ),

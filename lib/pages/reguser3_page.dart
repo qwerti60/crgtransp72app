@@ -9,6 +9,9 @@ import 'reguser4_page_.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'reguser5_page_.dart';
+import 'reguser_name.dart';
+
 //class creguser3_name extends StatefulWidget {
 
 class creguser3_name extends StatelessWidget {
@@ -247,7 +250,8 @@ class creguser3_name extends StatelessWidget {
                     }
                     if (rollNum == 1 && statNum == 2) {
                       final response = await http.post(
-                        Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
+                        Uri.parse(Config.baseUrl)
+                            .replace(path: '/api/regtest.php'),
                         body: json.encode({
                           'email': _emailController.text,
                           'password': _passwordController.text,
@@ -278,7 +282,9 @@ class creguser3_name extends StatelessWidget {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (_) => LoginPage()));
                     }
-                    if (rollNum == 1 && statNum == 1) {
+                    if ((rollNum == 1 && statNum == 1) ||
+                        (rollNum == 2 && statNum == 1) ||
+                        (rollNum == 3 && statNum == 1)) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -294,6 +300,48 @@ class creguser3_name extends StatelessWidget {
                               password: password),
                         ),
                       );
+                    }
+                    if ((rollNum == 2 && statNum == 2)) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => creguser_name(
+                              rollNum: rollNum,
+                              statNum: statNum,
+                              firstName: firstName,
+                              middleName: middleName,
+                              lastName: lastName,
+                              city: city,
+                              phone: phone,
+                              email: email,
+                              password: password,
+                              namefirm: '',
+                              innStr: '',
+                              ogrnStr: '',
+                              kppStr: '',
+                              vidt: ''),
+                        ),
+                      );
+                    }
+                    if (rollNum == 3 && statNum == 2) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser5_name_(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: '',
+                                    innStr: '',
+                                    ogrnStr: '',
+                                    kppStr: '',
+                                  )));
                     }
                   },
                 ),

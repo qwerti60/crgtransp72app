@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 import '../design/dimension.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../config.dart';
+import 'loginpage.dart';
 
 class creguser2_name extends StatefulWidget {
   final int statNum;
@@ -16,32 +21,123 @@ class creguser2_name extends StatefulWidget {
   final String namefirm;
   final String innStr;
   final String ogrnStr;
+  final String kppStr;
   final String vidt;
+  final String marka;
+  final String godv;
+  final String maxgruz;
+  final String dkuzov;
+  final String shkuzov;
+  final String vidk;
 
-  const creguser2_name(
-      {required this.statNum,
-      required this.rollNum,
-      required this.firstName,
-      required this.middleName,
-      required this.lastName,
-      required this.city,
-      required this.phone,
-      required this.email,
-      required this.password,
-      required this.namefirm,
-      required this.ogrnStr,
-      required this.innStr,
-      required this.vidt});
-  @override
-
-  // ignore: library_private_types_in_public_api
+  const creguser2_name({
+    required this.statNum,
+    required this.rollNum,
+    required this.firstName,
+    required this.middleName,
+    required this.lastName,
+    required this.city,
+    required this.phone,
+    required this.email,
+    required this.password,
+    required this.namefirm,
+    required this.ogrnStr,
+    required this.innStr,
+    required this.kppStr,
+    required this.vidt,
+    required this.marka,
+    required this.godv,
+    required this.maxgruz,
+    required this.dkuzov,
+    required this.shkuzov,
+    required this.vidk,
+  });
 
   _creguser2_nameForm createState() => _creguser2_nameForm();
 }
 
 class _creguser2_nameForm extends State<creguser2_name> {
+  late int statNum;
+  late int rollNum;
+  late String firstName;
+  late String middleName;
+  late String lastName;
+  late String city;
+  late String phone;
+  late String email;
+  late String password;
+  late String namefirm;
+  late String innStr;
+  late String ogrnStr;
+  late String kppStr;
+  late String vidt;
+  late String marka;
+  late String godv;
+  late String maxgruz;
+  late String dkuzov;
+  late String shkuzov;
+  late String vidk;
   @override
+  void initState() {
+    super.initState();
+
+    // Инициализация переменных значениями, переданными через виджет
+    statNum = widget.statNum;
+    rollNum = widget.rollNum;
+    firstName = widget.firstName;
+    middleName = widget.middleName;
+    lastName = widget.lastName;
+    city = widget.city;
+    phone = widget.phone;
+    email = widget.email;
+    password = widget.password;
+    namefirm = widget.namefirm;
+    innStr = widget.innStr;
+    ogrnStr = widget.ogrnStr;
+    kppStr = widget.kppStr;
+    vidt = widget.vidt;
+    marka = widget.marka;
+    godv = widget.godv;
+    maxgruz = widget.maxgruz;
+    dkuzov = widget.dkuzov;
+    shkuzov = widget.shkuzov;
+    marka = widget.marka;
+    godv = widget.godv;
+    maxgruz = widget.maxgruz;
+    dkuzov = widget.dkuzov;
+    shkuzov = widget.shkuzov;
+    vidk = widget.vidk;
+
+    printProperties();
+  }
+
+  void printProperties() {
+    print('statNum: $statNum');
+    print('rollNum: $rollNum');
+    print('firstName: $firstName');
+    print('middleName: $middleName');
+    print('lastName: $lastName');
+    print('city: $city');
+    print('phone: $phone');
+    print('email: $email');
+    print('password: $password');
+    print('namefirm: $namefirm');
+    print('ogrnStr: $ogrnStr');
+    print('innStr: $innStr');
+    print('kppStr: $kppStr');
+    print('vidt: $vidt');
+    print('marka: $marka');
+    print('godv: $godv');
+    print('maxgruz: $maxgruz');
+    print('dkuzov: $dkuzov');
+    print('shkuzov: $shkuzov');
+    print('vidk: $vidk');
+  }
+
   Widget build(BuildContext context) {
+    final TextEditingController _cenahaursController = TextEditingController();
+    final TextEditingController _cenasmenaController = TextEditingController();
+    final TextEditingController _cenakmController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -87,6 +183,7 @@ class _creguser2_nameForm extends State<creguser2_name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _cenahaursController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -119,6 +216,7 @@ class _creguser2_nameForm extends State<creguser2_name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _cenasmenaController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -151,6 +249,7 @@ class _creguser2_nameForm extends State<creguser2_name> {
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
+                controller: _cenakmController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -171,17 +270,87 @@ class _creguser2_nameForm extends State<creguser2_name> {
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: blueaccentColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                  onPressed: () {},
-                ),
+                    child: const Text('Продолжить'),
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: blueaccentColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () async {
+                      String cenahaurs = _cenahaursController.text;
+                      String cenasmena = _cenasmenaController.text;
+                      String cenakm = _cenakmController.text;
+
+                      if (cenahaurs.isEmpty ||
+                          cenasmena.isEmpty ||
+                          cenakm.isEmpty == null) {
+// Если хотя бы одно поле пустое, показываем осведомительное сообщение
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Пожалуйста, заполните все поля.'),
+                          ),
+                        );
+                        return;
+                      }
+                      //`rollNum`, `statNum`, `firstName`, `lastName`, `middleName`, `city`, `phone`, `email`, `password`, `namefirm`, `innStr`, `ogrnStr`, `kppStr`, `vidt`, `marka`, `godv`, `maxgruz`, `dkuzov`, `shkuzov`, `vidk`, `cenahaurs`, `cenasmena`, `cenakm`7
+                      if ((rollNum == 2 && statNum == 1) ||
+                          (rollNum == 2 && statNum == 2) ||
+                          (rollNum == 3 && statNum == 1) ||
+                          (rollNum == 3 && statNum == 2)) {
+                        final response = await http.post(
+                          Uri.parse(Config.baseUrl)
+                              .replace(path: '/api/register1.php'),
+                          headers: {'Content-Type': 'application/json'},
+                          body: json.encode({
+                            'rollNum': rollNum,
+                            'statNum': statNum,
+                            'firstName': firstName,
+                            'lastName': lastName,
+                            'middleName': middleName,
+                            'city': city,
+                            'phone': phone,
+                            'email': email,
+                            'password': password,
+                            'namefirm': namefirm,
+                            'innStr': innStr,
+                            'ogrnStr': ogrnStr,
+                            'kppStr': kppStr,
+                            'vidt': vidt,
+                            'marka': marka,
+                            'godv': godv,
+                            'maxgruz': maxgruz,
+                            'dkuzov': dkuzov,
+                            'shkuzov': shkuzov,
+                            'vidk': vidk,
+                            'cenahaurs': _cenahaursController.text,
+                            'cenasmena': _cenasmenaController.text,
+                            'cenakm': _cenakmController.text
+                          }),
+                        );
+
+                        if (response.statusCode == 200) {
+                          print(response.body);
+                          final data = json.decode(response.body);
+
+                          if (data['status'] == 'success') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Регистрация успешна!')));
+// Перейти на экран авторизации
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => LoginPage()));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Ошибка: ${data['message']}')));
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Ошибка сервера')));
+                        }
+                      }
+                    }),
               ),
             ),
           ],

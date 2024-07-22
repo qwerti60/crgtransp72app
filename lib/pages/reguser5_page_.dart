@@ -7,6 +7,7 @@ import '../config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'reguser2_page.dart';
 import 'reguser_name.dart';
 
 //import 'reguser2_page_.dart';
@@ -27,6 +28,7 @@ class creguser5_name_ extends StatefulWidget {
   final String namefirm;
   final String innStr;
   final String ogrnStr;
+  final String kppStr;
 
   const creguser5_name_(
       {super.key,
@@ -41,7 +43,8 @@ class creguser5_name_ extends StatefulWidget {
       required this.password,
       required this.namefirm,
       required this.ogrnStr,
-      required this.innStr});
+      required this.innStr,
+      required this.kppStr});
   @override
 
   // ignore: library_private_types_in_public_api
@@ -64,6 +67,7 @@ class _creguser5_nameForm extends State<creguser5_name_> {
   late String namefirm;
   late String innStr;
   late String ogrnStr;
+  late String kppStr;
 
   @override
   void initState() {
@@ -82,13 +86,14 @@ class _creguser5_nameForm extends State<creguser5_name_> {
     namefirm = widget.namefirm;
     innStr = widget.innStr;
     ogrnStr = widget.ogrnStr;
+    kppStr = widget.kppStr;
 
     _fetchVidT();
   }
 
   Future _fetchVidT() async {
-    final response =
-        await http.get(Uri.parse(Config.baseUrl).replace(path: 'vidt.php'));
+    final response = await http
+        .get(Uri.parse(Config.baseUrl).replace(path: '/api/vidt.php'));
     //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
 
     if (response.statusCode == 200) {
@@ -209,24 +214,52 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                   ),
                   onPressed: () {
                     // String namefirm = _nameController.text;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => creguser_name(
-                                  rollNum: rollNum,
-                                  statNum: statNum,
-                                  firstName: firstName,
-                                  middleName: middleName,
-                                  lastName: lastName,
-                                  city: city,
-                                  phone: phone,
-                                  email: email,
-                                  password: password,
-                                  namefirm: namefirm,
-                                  innStr: innStr,
-                                  ogrnStr: ogrnStr,
-                                  vidt: _selectedVidt!,
-                                )));
+                    if (rollNum == 3) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser2_name(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                    kppStr: kppStr,
+                                    vidt: _selectedVidt!,
+                                    godv: '',
+                                    marka: '',
+                                    maxgruz: '',
+                                    dkuzov: '',
+                                    shkuzov: '',
+                                    vidk: '',
+                                  )));
+                    } else
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => creguser_name(
+                                    rollNum: rollNum,
+                                    statNum: statNum,
+                                    firstName: firstName,
+                                    middleName: middleName,
+                                    lastName: lastName,
+                                    city: city,
+                                    phone: phone,
+                                    email: email,
+                                    password: password,
+                                    namefirm: namefirm,
+                                    innStr: innStr,
+                                    ogrnStr: ogrnStr,
+                                    kppStr: kppStr,
+                                    vidt: _selectedVidt!,
+                                  )));
                   },
                 ),
               ),
