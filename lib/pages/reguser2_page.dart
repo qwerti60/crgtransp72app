@@ -101,11 +101,6 @@ class _creguser2_nameForm extends State<creguser2_name> {
     maxgruz = widget.maxgruz;
     dkuzov = widget.dkuzov;
     shkuzov = widget.shkuzov;
-    marka = widget.marka;
-    godv = widget.godv;
-    maxgruz = widget.maxgruz;
-    dkuzov = widget.dkuzov;
-    shkuzov = widget.shkuzov;
     vidk = widget.vidk;
 
     printProperties();
@@ -330,6 +325,12 @@ class _creguser2_nameForm extends State<creguser2_name> {
                             'cenakm': _cenakmController.text
                           }),
                         );
+
+                        print(marka);
+                        print(godv);
+                        print(maxgruz);
+                        print(dkuzov);
+                        print(shkuzov);
 
                         if (response.statusCode == 200) {
                           print(response.body);

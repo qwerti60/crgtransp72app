@@ -6,6 +6,7 @@ import 'package:crgtransp72app/design/colors.dart';
 import 'package:crgtransp72app/pages/changerol_page.dart';
 import 'package:flutter/material.dart';
 
+import '../config.dart';
 import '../design/dimension.dart';
 import 'cities.dart';
 import 'gruz_vodit.dart';
@@ -25,6 +26,54 @@ class LoginPage extends StatefulWidget {
 class _LoginState extends State<LoginPage> {
   var login;
   var password;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  void _login() async {
+    //var url = 'http://ivnovav.ru/api/autoriz.php';
+    var response = await http.post(
+      Uri.parse(Config.baseUrl).replace(path: '/api/autoriz.php'),
+      body: {
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      },
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    );
+
+    var json = jsonDecode(response.body);
+
+// Проверяем rollNum и statNum и переходим на соответствующий экран
+    if (json['success'] != null && json['success']) {
+      // Проверяем rollNum и выполняем навигацию
+      switch (json['rollNum']) {
+        case 1:
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => zprofil_name()));
+          break;
+        case 2:
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => zprofil_name()));
+          break;
+        case 3:
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => gruz_vodit()));
+          break;
+        default:
+          // Обработка, если rollNum не соответствует ожидаемым значениям
+          break;
+      }
+    } else {
+// Выводим сообщение об ошибке
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(json['message']),
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +113,7 @@ class _LoginState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 30.0),
               child: TextFormField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -73,7 +123,7 @@ class _LoginState extends State<LoginPage> {
                     borderSide: BorderSide(color: blueaccentColor),
                   ),
                   prefixIcon: Icon(Icons.person),
-                  hintText: 'Имя пользователя',
+                  hintText: 'E-mail',
                   fillColor: grayprprColor,
                   filled: true,
                 ),
@@ -86,6 +136,7 @@ class _LoginState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 20.0),
               child: TextFormField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -121,13 +172,11 @@ class _LoginState extends State<LoginPage> {
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                     ),
                     onPressed: () {
-                      print(login);
-                      print(password);
-                      signup(login, password);
+                      _login();
                     }),
               ),
             ),
-            Container(
+            /*Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 20.0),
               child: SizedBox(
@@ -143,8 +192,8 @@ class _LoginState extends State<LoginPage> {
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => RegisterScreen()));
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => MyApp()));
                     }),
               ),
             ),
@@ -231,7 +280,7 @@ class _LoginState extends State<LoginPage> {
                           MaterialPageRoute(builder: (_) => vod_zak()));
                     }),
               ),
-            ),
+            ),*/
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 80.0),

@@ -50,7 +50,7 @@ class creguser_name extends StatefulWidget {
 
 class _creguser_nameForm extends State<creguser_name> {
   List _vidk = [];
-  String? _selectedVidk;
+  String? _selectedVidkuzov;
   late int statNum;
   late int rollNum;
   late String firstName;
@@ -110,6 +110,7 @@ class _creguser_nameForm extends State<creguser_name> {
     final TextEditingController _maxgruzkppController = TextEditingController();
     final TextEditingController _dkuzovController = TextEditingController();
     final TextEditingController _shkuzovController = TextEditingController();
+    final TextEditingController _vidkuzovController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -317,7 +318,25 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              height: 60,
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              margin: EdgeInsets.only(top: 10.0),
+              child: TextFormField(
+                controller: _vidkuzovController,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    borderSide: BorderSide(color: blueaccentColor),
+                  ),
+                  fillColor: grayprprColor,
+                  filled: true,
+                  hintText: '3',
+                ),
+              ),
+            ),
+            /*Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
@@ -325,7 +344,6 @@ class _creguser_nameForm extends State<creguser_name> {
                 border: Border.all(color: Colors.black38, width: 2),
                 color: grayprprColor,
               ),
-// Step 2.
               child: _vidk.isEmpty
                   ? Center(child: CircularProgressIndicator())
                   : Column(
@@ -341,18 +359,18 @@ class _creguser_nameForm extends State<creguser_name> {
                             ),
                           ),
                           dropdownColor: grayprprColor,
-                          value: _selectedVidk,
+                          value: _selectedVidkuzov,
                           onChanged: (String? newValue) {
                             setState(() {
-                              _selectedVidk = newValue;
+                              _selectedVidkuzov = newValue;
                             });
                           },
                           items: _vidk
-                              .map<DropdownMenuItem<String>>((dynamic vidk) {
+                              .map<DropdownMenuItem<String>>((dynamic vidk1) {
                             return DropdownMenuItem(
-                              value: vidk['name'],
+                              value: vidk1['namevidk'],
                               child: Text(
-                                vidk['name'],
+                                vidk1['namevidk'],
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38,
@@ -364,7 +382,7 @@ class _creguser_nameForm extends State<creguser_name> {
                         ),
                       ],
                     ),
-            ),
+            ),*/
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(top: 30.0),
@@ -381,20 +399,7 @@ class _creguser_nameForm extends State<creguser_name> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    /*
-                        final TextEditingController _markaController = TextEditingController();
-    final TextEditingController _godvController = TextEditingController();
-    final TextEditingController _maxgruzkppController = TextEditingController();
-    final TextEditingController _dkuzovController = TextEditingController();
-    final TextEditingController _shkuzovController = TextEditingController();
-                    */
-                    String marka = _markaController.text;
-                    String godv = _godvController.text;
-                    String maxgruz = _maxgruzkppController.text;
-                    String dkuzov = _dkuzovController.text;
-                    String shkuzov = _shkuzovController.text;
-
-                    if (marka.isEmpty == null) {
+                    if (_markaController.text.isEmpty == null) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -421,13 +426,18 @@ class _creguser_nameForm extends State<creguser_name> {
                                     ogrnStr: ogrnStr,
                                     kppStr: kppStr,
                                     vidt: vidt,
-                                    godv: godv,
-                                    marka: marka,
-                                    maxgruz: maxgruz,
-                                    dkuzov: dkuzov,
-                                    shkuzov: shkuzov,
-                                    vidk: _selectedVidk!,
+                                    marka: _markaController.text,
+                                    godv: _godvController.text,
+                                    maxgruz: _maxgruzkppController.text,
+                                    dkuzov: _dkuzovController.text,
+                                    shkuzov: _shkuzovController.text,
+                                    vidk: _vidkuzovController
+                                        .text, //_selectedVidkuzov!,
                                   )));
+                    print(_markaController.text);
+                    print(_godvController.text);
+                    print(_maxgruzkppController.text);
+                    //            print(_selectedVidkuzov!);
                   },
                 ),
               ),
