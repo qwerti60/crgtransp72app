@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import '../design/colors.dart';
 import 'profil_m.dart';
 
-
 class profil_otkl extends StatefulWidget {
   const profil_otkl({super.key});
 
   @override
   profil_otklForm createState() => profil_otklForm();
-
 }
 
 class profil_otklForm extends State<profil_otkl> {
@@ -26,7 +24,7 @@ class profil_otklForm extends State<profil_otkl> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_green_white.png"),
@@ -44,8 +42,8 @@ class profil_otklForm extends State<profil_otkl> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Иван Иванов',
                 style: TextStyle(
@@ -58,23 +56,21 @@ class profil_otklForm extends State<profil_otkl> {
             ),
             Container(
                 child: Center(
-                      
-child: SwitchListTile(
-        tileColor: whiteprColor,
-        activeColor: GreenColor,
-        title: const Text('Доступен для заказов'),
-        value: isSwitched,
-        onChanged: (bool? value) {
-          setState(() {
-            isSwitched = value!;
-          });
-        },
-      )
-                )),
+                    child: SwitchListTile(
+              tileColor: whiteprColor,
+              activeColor: GreenColor,
+              title: const Text('Доступен для заказов'),
+              value: isSwitched,
+              onChanged: (bool? value) {
+                setState(() {
+                  isSwitched = value!;
+                });
+              },
+            ))),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Мои отклики',
                 style: TextStyle(
@@ -84,131 +80,63 @@ child: SwitchListTile(
                 textAlign: TextAlign.left,
               ),
             ),
-              Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                // Первый текст выровнен слева
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Санкт-Петербург'),
-                  ),
-                ),
-                // Картинка выровнена по центру
-                Image.asset(
-                  'assets/images/strelkaleft.png', // путь к изображению
-                ),
-                // Второй текст выровнен справа
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Москва'),
-                  ),
-                ),
-              ],
-            ),
-          ),            ),             
-                        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Загрузка 13.04"),
-                Text("Выгрузка 17.04"),
-              ],
-            ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Исполнитель:"),
-                Text("Не выбран"),
-              ],
-            ),
-          ),          ),             
-               Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  child: const Text('Детали...'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: GreenColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => profil_m()));
-                },
-                ),
-              ),
-            ),       
             Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                // Первый текст выровнен слева
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Санкт-Петербург'),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    // Первый текст выровнен слева
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Санкт-Петербург'),
+                      ),
+                    ),
+                    // Картинка выровнена по центру
+                    Image.asset(
+                      'assets/images/strelkaleft.png', // путь к изображению
+                    ),
+                    // Второй текст выровнен справа
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('Москва'),
+                      ),
+                    ),
+                  ],
                 ),
-                // Картинка выровнена по центру
-                Image.asset(
-                  'assets/images/strelkaleft.png', // путь к изображению
+              ),
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Загрузка 13.04"),
+                    Text("Выгрузка 17.04"),
+                  ],
                 ),
-                // Второй текст выровнен справа
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Москва'),
-                  ),
+              ),
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Исполнитель:"),
+                    Text("Не выбран"),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),            ),             
-                        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Загрузка 13.04"),
-                Text("Выгрузка 17.04"),
-              ],
-            ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Исполнитель:"),
-                Text("Вы", style: TextStyle(color: GreenColor),),
-              ],
-            ),
-          ),          ),             
-                Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Детали...'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -217,86 +145,164 @@ child: SwitchListTile(
                     shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
-                onPressed: () {
-                      }
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const profil_m()));
+                  },
+                  child: const Text('Детали...'),
                 ),
               ),
-            ),       
-           Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                // Первый текст выровнен слева
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Санкт-Петербург'),
-                  ),
-                ),
-                // Картинка выровнена по центру
-                Image.asset(
-                  'assets/images/strelkaleft.png', // путь к изображению
-                ),
-                // Второй текст выровнен справа
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Москва'),
-                  ),
-                ),
-              ],
             ),
-          ),            ),             
-                        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Загрузка 13.04"),
-                Text("Выгрузка 17.04"),
-              ],
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    // Первый текст выровнен слева
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Санкт-Петербург'),
+                      ),
+                    ),
+                    // Картинка выровнена по центру
+                    Image.asset(
+                      'assets/images/strelkaleft.png', // путь к изображению
+                    ),
+                    // Второй текст выровнен справа
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('Москва'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Исполнитель:"),
-                Text("Найден", style: TextStyle(color: Colors.red),),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Загрузка 13.04"),
+                    Text("Выгрузка 17.04"),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Исполнитель:"),
+                    Text(
+                      "Вы",
+                      style: TextStyle(color: GreenColor),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Детали...'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: GreenColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                onPressed: () {
-                      }
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: GreenColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Детали...')),
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    // Первый текст выровнен слева
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Санкт-Петербург'),
+                      ),
+                    ),
+                    // Картинка выровнена по центру
+                    Image.asset(
+                      'assets/images/strelkaleft.png', // путь к изображению
+                    ),
+                    // Второй текст выровнен справа
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('Москва'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),       
-
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Загрузка 13.04"),
+                    Text("Выгрузка 17.04"),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Исполнитель:"),
+                    Text(
+                      "Найден",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: GreenColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Детали...')),
+              ),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -309,13 +315,13 @@ child: SwitchListTile(
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

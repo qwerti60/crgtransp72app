@@ -1,8 +1,13 @@
 import 'package:crgtransp72app/pages/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'change_user.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -15,11 +20,27 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _startTimer() {
-    Timer(Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
+    final token = getSecureToken(); // Await the secure token7
+    Timer(const Duration(seconds: 5), () {
+      //Navigator.of(context).pushReplacement(
+      //  MaterialPageRoute(builder: (context) => const LoginPage()));
+      if (token == null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => change_user()),
+        );
+      }
     });
+  }
+
+  Future<String?> getSecureToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('789456123'); // Получаем токен
+    print(token);
+    return token;
   }
 
   @override

@@ -5,19 +5,23 @@ import 'package:http/http.dart' as http;
 import 'viev_data.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: RegisterPage(),
     );
   }
 }
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -41,14 +45,14 @@ class _RegisterPageState extends State {
     final data = jsonDecode(response.body);
     if (data['status'] == 'success') {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Registration Successful")),
+        const SnackBar(content: Text("Registration Successful")),
       );
       _usernameController.text = "";
       _emailController.text = "";
       _passwordController.text = "";
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Registration Failed")),
+        const SnackBar(content: Text("Registration Failed")),
       );
     }
   }
@@ -56,16 +60,16 @@ class _RegisterPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('User Registration')),
+      appBar: AppBar(title: const Text('User Registration')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
               TextFormField(
                 controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
+                decoration: const InputDecoration(labelText: 'Username'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     // Fixed logical operator
@@ -76,7 +80,7 @@ class _RegisterPageState extends State {
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     // Fixed logical operator
@@ -87,7 +91,7 @@ class _RegisterPageState extends State {
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -97,20 +101,22 @@ class _RegisterPageState extends State {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   registerUser();
                 },
-                child: Text('Register'),
+                child: const Text('Register'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => vievdata()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const vievdata()));
                 },
-                child: Text('Viev data'),
+                child: const Text('Viev data'),
               ),
             ],
           ),

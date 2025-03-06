@@ -14,16 +14,16 @@ class zprofil_zakaz extends StatefulWidget {
 
 class zprofil_zakazForm extends State<zprofil_zakaz> {
   // var _currentPage = 0;
-  var _currentPage = 0;
+  final _currentPage = 0;
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: violetColor,
-        iconTheme: IconThemeData(color: whiteprColor),
+        iconTheme: const IconThemeData(color: whiteprColor),
         centerTitle: true,
-        title: Column(
+        title: const Column(
           children: [
             Text(
               'Заказы',
@@ -38,13 +38,13 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   children: [
                     // Первый текст выровнен слева
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text('Санкт-Петербург'),
@@ -55,7 +55,7 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
                       'assets/images/strelkaleftblue.png', // путь к изображению
                     ),
                     // Второй текст выровнен справа
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text('Москва'),
@@ -66,8 +66,8 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -78,8 +78,8 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -90,12 +90,11 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Детали...'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -105,20 +104,21 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => zprofil_m()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const zprofil_m()));
                   },
+                  child: const Text('Детали...'),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   children: [
                     // Первый текст выровнен слева
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text('Санкт-Петербург'),
@@ -129,7 +129,7 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
                       'assets/images/strelkaleftblue.png', // путь к изображению
                     ),
                     // Второй текст выровнен справа
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text('Москва'),
@@ -140,8 +140,8 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -152,8 +152,8 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -164,12 +164,11 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Детали...'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -180,41 +179,16 @@ class zprofil_zakazForm extends State<zprofil_zakaz> {
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => CustomLayout()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const CustomLayout()));
                   },
+                  child: const Text('Детали...'),
                 ),
               ),
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.fire_truck),
-            label: 'Техника',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.subject),
-            label: 'Заказы',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Водители',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Профиль',
-          ),
-        ],
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentPage,
-        fixedColor: violetColor,
-        onTap: (int intIndex) {
-          setState(() {
-            _currentPage = intIndex;
-          });
-        },
       ),
     );
   }

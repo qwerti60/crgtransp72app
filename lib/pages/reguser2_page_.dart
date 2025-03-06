@@ -32,13 +32,13 @@ class _creguser2_nameForm extends State<creguser2_name_> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -46,8 +46,8 @@ class _creguser2_nameForm extends State<creguser2_name_> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Час',
                 style: TextStyle(
@@ -59,10 +59,10 @@ class _creguser2_nameForm extends State<creguser2_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -78,8 +78,8 @@ class _creguser2_nameForm extends State<creguser2_name_> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Смена',
                 style: TextStyle(
@@ -91,10 +91,10 @@ class _creguser2_nameForm extends State<creguser2_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -110,8 +110,8 @@ class _creguser2_nameForm extends State<creguser2_name_> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'За км',
                 style: TextStyle(
@@ -123,10 +123,10 @@ class _creguser2_nameForm extends State<creguser2_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -141,12 +141,11 @@ class _creguser2_nameForm extends State<creguser2_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -157,12 +156,12 @@ class _creguser2_nameForm extends State<creguser2_name_> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => profil_name()));
-                  }, 
+                        MaterialPageRoute(builder: (_) => const profil_name()));
+                  },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),
-     
           ],
         ),
       ),

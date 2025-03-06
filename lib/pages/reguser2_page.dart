@@ -31,6 +31,7 @@ class creguser2_name extends StatefulWidget {
   final String vidk;
 
   const creguser2_name({
+    super.key,
     required this.statNum,
     required this.rollNum,
     required this.firstName,
@@ -53,6 +54,7 @@ class creguser2_name extends StatefulWidget {
     required this.vidk,
   });
 
+  @override
   _creguser2_nameForm createState() => _creguser2_nameForm();
 }
 
@@ -129,10 +131,11 @@ class _creguser2_nameForm extends State<creguser2_name> {
     print('vidk: $vidk');
   }
 
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController _cenahaursController = TextEditingController();
-    final TextEditingController _cenasmenaController = TextEditingController();
-    final TextEditingController _cenakmController = TextEditingController();
+    final TextEditingController cenahaursController = TextEditingController();
+    final TextEditingController cenasmenaController = TextEditingController();
+    final TextEditingController cenakmController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -148,13 +151,13 @@ class _creguser2_nameForm extends State<creguser2_name> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -162,8 +165,8 @@ class _creguser2_nameForm extends State<creguser2_name> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Час',
                 style: TextStyle(
@@ -175,11 +178,11 @@ class _creguser2_nameForm extends State<creguser2_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _cenahaursController,
-                decoration: InputDecoration(
+                controller: cenahaursController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -195,8 +198,8 @@ class _creguser2_nameForm extends State<creguser2_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Смена',
                 style: TextStyle(
@@ -208,11 +211,11 @@ class _creguser2_nameForm extends State<creguser2_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _cenasmenaController,
-                decoration: InputDecoration(
+                controller: cenasmenaController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -228,8 +231,8 @@ class _creguser2_nameForm extends State<creguser2_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'За км',
                 style: TextStyle(
@@ -241,11 +244,11 @@ class _creguser2_nameForm extends State<creguser2_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _cenakmController,
-                decoration: InputDecoration(
+                controller: cenakmController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -260,12 +263,11 @@ class _creguser2_nameForm extends State<creguser2_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    child: const Text('Продолжить'),
                     style: TextButton.styleFrom(
                       fixedSize: const Size(double.infinity, 50),
                       foregroundColor: whiteprColor,
@@ -275,16 +277,14 @@ class _creguser2_nameForm extends State<creguser2_name> {
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                     ),
                     onPressed: () async {
-                      String cenahaurs = _cenahaursController.text;
-                      String cenasmena = _cenasmenaController.text;
-                      String cenakm = _cenakmController.text;
+                      String cenahaurs = cenahaursController.text;
+                      String cenasmena = cenasmenaController.text;
+                      String cenakm = cenakmController.text;
 
-                      if (cenahaurs.isEmpty ||
-                          cenasmena.isEmpty ||
-                          cenakm.isEmpty == null) {
+                      if (cenahaurs.isEmpty || cenasmena.isEmpty) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Пожалуйста, заполните все поля.'),
                           ),
                         );
@@ -320,9 +320,9 @@ class _creguser2_nameForm extends State<creguser2_name> {
                             'dkuzov': dkuzov,
                             'shkuzov': shkuzov,
                             'vidk': vidk,
-                            'cenahaurs': _cenahaursController.text,
-                            'cenasmena': _cenasmenaController.text,
-                            'cenakm': _cenakmController.text
+                            'cenahaurs': cenahaursController.text,
+                            'cenasmena': cenasmenaController.text,
+                            'cenakm': cenakmController.text
                           }),
                         );
 
@@ -337,21 +337,25 @@ class _creguser2_nameForm extends State<creguser2_name> {
                           final data = json.decode(response.body);
 
                           if (data['status'] == 'success') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Регистрация успешна!')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Регистрация успешна!')));
 // Перейти на экран авторизации
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => LoginPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const LoginPage()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Ошибка: ${data['message']}')));
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Ошибка сервера')));
+                              const SnackBar(content: Text('Ошибка сервера')));
                         }
                       }
-                    }),
+                    },
+                    child: const Text('Продолжить')),
               ),
             ),
           ],

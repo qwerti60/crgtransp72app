@@ -26,7 +26,8 @@ class creguser_name extends StatefulWidget {
   final String vidt;
 
   const creguser_name(
-      {required this.statNum,
+      {super.key,
+      required this.statNum,
       required this.rollNum,
       required this.firstName,
       required this.middleName,
@@ -65,7 +66,8 @@ class _creguser_nameForm extends State<creguser_name> {
   late String ogrnStr;
   late String kppStr;
   late String vidt;
-
+  List _gp = [];
+  String? _selectedGP;
   @override
   void initState() {
     super.initState();
@@ -87,6 +89,7 @@ class _creguser_nameForm extends State<creguser_name> {
     vidt = widget.vidt;
 
     _fetchVidT();
+    _fetchGP();
   }
 
   Future _fetchVidT() async {
@@ -103,14 +106,28 @@ class _creguser_nameForm extends State<creguser_name> {
     }
   }
 
+  Future _fetchGP() async {
+    final response = await http
+        .get(Uri.parse(Config.baseUrl).replace(path: '/api/get_vidgr.php'));
+    //    Uri.parse(Config.baseUrl).replace(path: 'regtest.php'),
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _gp = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load cities');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _markaController = TextEditingController();
-    final TextEditingController _godvController = TextEditingController();
-    final TextEditingController _maxgruzkppController = TextEditingController();
-    final TextEditingController _dkuzovController = TextEditingController();
-    final TextEditingController _shkuzovController = TextEditingController();
-    final TextEditingController _vidkuzovController = TextEditingController();
+    final TextEditingController markaController = TextEditingController();
+    final TextEditingController godvController = TextEditingController();
+    final TextEditingController maxgruzkppController = TextEditingController();
+    final TextEditingController dkuzovController = TextEditingController();
+    final TextEditingController shkuzovController = TextEditingController();
+    final TextEditingController vidkuzovController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -126,13 +143,13 @@ class _creguser_nameForm extends State<creguser_name> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -140,8 +157,8 @@ class _creguser_nameForm extends State<creguser_name> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Марка',
                 style: TextStyle(
@@ -153,11 +170,11 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _markaController,
-                decoration: InputDecoration(
+                controller: markaController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -173,8 +190,8 @@ class _creguser_nameForm extends State<creguser_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Год выпуска',
                 style: TextStyle(
@@ -186,11 +203,11 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _godvController,
-                decoration: InputDecoration(
+                controller: godvController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -206,8 +223,8 @@ class _creguser_nameForm extends State<creguser_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Грузоподъемность',
                 style: TextStyle(
@@ -219,28 +236,56 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
-              child: TextFormField(
-                controller: _maxgruzkppController,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    borderSide: BorderSide(color: blueaccentColor),
-                  ),
-                  hintText: '20 т.',
-                  fillColor: grayprprColor,
-                  filled: true,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: Colors.black38, width: 2),
+                color: grayprprColor,
               ),
+              child: _gp.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownButton(
+                          hint: const Text(
+                            'Выберите грузоподьемность',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black38,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          dropdownColor: grayprprColor,
+                          value: _selectedGP,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedGP = newValue;
+                            });
+                          },
+                          items:
+                              _gp.map<DropdownMenuItem<String>>((dynamic gp) {
+                            return DropdownMenuItem(
+                              value: gp['name'],
+                              child: Text(
+                                gp['name'],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black38,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Длинна кузова',
                 style: TextStyle(
@@ -252,11 +297,11 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _dkuzovController,
-                decoration: InputDecoration(
+                controller: dkuzovController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -272,8 +317,8 @@ class _creguser_nameForm extends State<creguser_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Ширина кузова',
                 style: TextStyle(
@@ -285,11 +330,11 @@ class _creguser_nameForm extends State<creguser_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _shkuzovController,
-                decoration: InputDecoration(
+                controller: shkuzovController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -305,8 +350,8 @@ class _creguser_nameForm extends State<creguser_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Вид кузова',
                 style: TextStyle(
@@ -317,7 +362,7 @@ class _creguser_nameForm extends State<creguser_name> {
                 textAlign: TextAlign.left,
               ),
             ),
-            Container(
+            /* Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               margin: EdgeInsets.only(top: 10.0),
               child: TextFormField(
@@ -335,22 +380,22 @@ class _creguser_nameForm extends State<creguser_name> {
                   hintText: '3',
                 ),
               ),
-            ),
-            /*Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 10.0),
+            ),*/
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.black38, width: 2),
                 color: grayprprColor,
               ),
               child: _vidk.isEmpty
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         DropdownButton(
-                          hint: Text(
+                          hint: const Text(
                             'Выберите вид кузова',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -371,7 +416,7 @@ class _creguser_nameForm extends State<creguser_name> {
                               value: vidk1['namevidk'],
                               child: Text(
                                 vidk1['namevidk'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38,
                                   fontSize: 16.0,
@@ -382,14 +427,13 @@ class _creguser_nameForm extends State<creguser_name> {
                         ),
                       ],
                     ),
-            ),*/
+            ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -399,46 +443,38 @@ class _creguser_nameForm extends State<creguser_name> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    if (_markaController.text.isEmpty == null) {
-// Если хотя бы одно поле пустое, показываем осведомительное сообщение
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              'Пожалуйста, заполните все поля и выберите вид кузова.'),
-                        ),
-                      );
-                    } else
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => creguser2_name(
-                                    rollNum: rollNum,
-                                    statNum: statNum,
-                                    firstName: firstName,
-                                    middleName: middleName,
-                                    lastName: lastName,
-                                    city: city,
-                                    phone: phone,
-                                    email: email,
-                                    password: password,
-                                    namefirm: namefirm,
-                                    innStr: innStr,
-                                    ogrnStr: ogrnStr,
-                                    kppStr: kppStr,
-                                    vidt: vidt,
-                                    marka: _markaController.text,
-                                    godv: _godvController.text,
-                                    maxgruz: _maxgruzkppController.text,
-                                    dkuzov: _dkuzovController.text,
-                                    shkuzov: _shkuzovController.text,
-                                    vidk: _vidkuzovController
-                                        .text, //_selectedVidkuzov!,
-                                  )));
-                    print(_markaController.text);
-                    print(_godvController.text);
-                    print(_maxgruzkppController.text);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => creguser2_name(
+                                  rollNum: rollNum,
+                                  statNum: statNum,
+                                  firstName: firstName,
+                                  middleName: middleName,
+                                  lastName: lastName,
+                                  city: city,
+                                  phone: phone,
+                                  email: email,
+                                  password: password,
+                                  namefirm: namefirm,
+                                  innStr: innStr,
+                                  ogrnStr: ogrnStr,
+                                  kppStr: kppStr,
+                                  vidt: vidt,
+                                  marka: markaController.text,
+                                  godv: godvController.text,
+                                  maxgruz: _selectedGP!,
+                                  dkuzov: dkuzovController.text,
+                                  shkuzov: shkuzovController.text,
+                                  vidk:
+                                      _selectedVidkuzov!, //_selectedVidkuzov!,
+                                )));
+                    print(markaController.text);
+                    print(godvController.text);
+                    print(maxgruzkppController.text);
                     //            print(_selectedVidkuzov!);
                   },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),

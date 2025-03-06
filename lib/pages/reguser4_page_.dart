@@ -21,6 +21,7 @@ class creguser4_name_ extends StatefulWidget {
   final String password;
 
   const creguser4_name_({
+    super.key,
     required this.statNum,
     required this.rollNum,
     required this.firstName,
@@ -64,11 +65,12 @@ class _creguser4_nameForm extends State<creguser4_name_> {
     password = widget.password;
   }
 
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _innController = TextEditingController();
-    final TextEditingController _kppController = TextEditingController();
-    final TextEditingController _ogrnController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController innController = TextEditingController();
+    final TextEditingController kppController = TextEditingController();
+    final TextEditingController ogrnController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -84,13 +86,13 @@ class _creguser4_nameForm extends State<creguser4_name_> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -98,8 +100,8 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Наименование',
                 style: TextStyle(
@@ -111,11 +113,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
+                controller: nameController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -131,8 +133,8 @@ class _creguser4_nameForm extends State<creguser4_name_> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'ИНН',
                 style: TextStyle(
@@ -144,11 +146,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _innController,
-                decoration: InputDecoration(
+                controller: innController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -164,8 +166,8 @@ class _creguser4_nameForm extends State<creguser4_name_> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'КПП',
                 style: TextStyle(
@@ -177,11 +179,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _kppController,
-                decoration: InputDecoration(
+                controller: kppController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -197,8 +199,8 @@ class _creguser4_nameForm extends State<creguser4_name_> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'ОГРН',
                 style: TextStyle(
@@ -210,11 +212,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _ogrnController,
-                decoration: InputDecoration(
+                controller: ogrnController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -229,14 +231,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: Text(rollNum == 1 && statNum == 1
-                      ? 'Регистрация'
-                      : 'Продолжить'), //                 child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -246,11 +245,11 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    String innStr = _innController.text;
-                    String ogrnStr = _ogrnController.text;
-                    String namefirm = _nameController.text;
-                    String kppStr = _kppController.text;
-                    bool _isNumeric(String str) {
+                    String innStr = innController.text;
+                    String ogrnStr = ogrnController.text;
+                    String namefirm = nameController.text;
+                    String kppStr = kppController.text;
+                    bool isNumeric(String str) {
                       return RegExp(r'^[0-9]+$').hasMatch(str);
                     }
 
@@ -297,24 +296,24 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                                   )));
                     }
                     //заказчик юр лицо
-                    if (rollNum == 1 && statNum == 1) {
+                    if ((rollNum == 1 && statNum == 1) ||
+                        (rollNum == 4 && statNum == 1)) {
                       if (namefirm.isEmpty ||
                           ogrnStr.isEmpty ||
-                          kppStr.isEmpty ||
-                          innStr.isEmpty == null) {
+                          kppStr.isEmpty) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Пожалуйста, заполните все поля'),
                           ),
                         );
                         return;
-                      } else if (!_isNumeric(innStr) ||
-                          !_isNumeric(ogrnStr) ||
-                          !_isNumeric(kppStr)) {
+                      } else if (!isNumeric(innStr) ||
+                          !isNumeric(ogrnStr) ||
+                          !isNumeric(kppStr)) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text(
                                 'ИНН, ОГОН, КПП должны содержать только цифры'),
                           ),
@@ -347,24 +346,31 @@ class _creguser4_nameForm extends State<creguser4_name_> {
                           final data = json.decode(response.body);
 
                           if (data['status'] == 'success') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Регистрация успешна!')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Регистрация успешна!')));
 // Перейти на экран авторизации
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => LoginPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const LoginPage()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Ошибка: ${data['message']}')));
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Ошибка сервера')));
+                              const SnackBar(content: Text('Ошибка сервера')));
                         }
                       }
 
                       register();
                     }
                   },
+                  child: Text(((rollNum == 1 && statNum == 1) ||
+                          (rollNum == 4 && statNum == 1))
+                      ? 'Регистрация'
+                      : 'Продолжить'),
                 ),
               ),
             ),

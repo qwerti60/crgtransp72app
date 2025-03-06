@@ -3,21 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MyAppreg extends StatelessWidget {
+  const MyAppreg({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Registration',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Register'),
+          title: const Text('Register'),
         ),
-        body: RegisterForm(),
+        body: const RegisterForm(),
       ),
     );
   }
 }
 
 class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
+
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
@@ -51,14 +55,14 @@ class _RegisterFormState extends State {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(labelText: 'Username'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your username';
@@ -68,7 +72,7 @@ class _RegisterFormState extends State {
             ),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -78,7 +82,7 @@ class _RegisterFormState extends State {
             ),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -89,9 +93,9 @@ class _RegisterFormState extends State {
             ),
             ElevatedButton(
               onPressed: () {
-                GlobalKey<FormState> _formKey = GlobalKey();
-                bool _validateAndSaveForm() {
-                  final form = _formKey.currentState!;
+                GlobalKey<FormState> formKey = GlobalKey();
+                bool validateAndSaveForm() {
+                  final form = formKey.currentState!;
                   if (form.validate() == true) {
                     _registerUser(
                       _usernameController.text,
@@ -102,7 +106,7 @@ class _RegisterFormState extends State {
                   return false;
                 }
               },
-              child: Text('Register'),
+              child: const Text('Register'),
             ),
           ],
         ),

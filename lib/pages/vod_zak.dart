@@ -16,23 +16,23 @@ class vod_zak extends StatefulWidget {
 }
 
 class vod_zakForm extends State<vod_zak> {
-  var _currentPage = 0;
+  final _currentPage = 0;
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(130.0), // Высота AppBar
+          preferredSize: const Size.fromHeight(130.0), // Высота AppBar
           child: AppBar(
             backgroundColor: violetColor,
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
+            flexibleSpace: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 40.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextField(
                       decoration: InputDecoration(
                         fillColor: whiteprColor,
@@ -62,14 +62,14 @@ class vod_zakForm extends State<vod_zak> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "№04294354",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite,
+                        icon: const Icon(Icons.favorite,
                             color: violetColor), // Иконка лайка
                         onPressed: () {
                           // Действие при нажатии иконки
@@ -80,8 +80,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -92,8 +92,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -104,8 +104,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -116,8 +116,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -131,13 +131,13 @@ class vod_zakForm extends State<vod_zak> {
               ),
               Container(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
                     children: [
                       Image.asset(
                         'assets/images/star.png', // путь к изображению
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text('4.2'),
@@ -145,7 +145,7 @@ class vod_zakForm extends State<vod_zak> {
                       ),
                       // Картинка выровнена по центру
                       // Второй текст выровнен справа
-                      Expanded(
+                      const Expanded(
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text('Отзывы 78'),
@@ -156,8 +156,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -175,14 +175,14 @@ class vod_zakForm extends State<vod_zak> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "№04294354",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite,
+                        icon: const Icon(Icons.favorite,
                             color: violetColor), // Иконка лайка
                         onPressed: () {
                           // Действие при нажатии иконки
@@ -193,8 +193,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -205,8 +205,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -217,8 +217,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -229,8 +229,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -244,13 +244,13 @@ class vod_zakForm extends State<vod_zak> {
               ),
               Container(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
                     children: [
                       Image.asset(
                         'assets/images/star.png', // путь к изображению
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text('4.2'),
@@ -258,7 +258,7 @@ class vod_zakForm extends State<vod_zak> {
                       ),
                       // Картинка выровнена по центру
                       // Второй текст выровнен справа
-                      Expanded(
+                      const Expanded(
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text('Отзывы 78'),
@@ -269,8 +269,8 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -283,12 +283,11 @@ class vod_zakForm extends State<vod_zak> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                margin: EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                margin: const EdgeInsets.only(top: 20.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    child: const Text('Заказ водителя 2'),
                     style: TextButton.styleFrom(
                       fixedSize: const Size(double.infinity, 50),
                       foregroundColor: whiteprColor,
@@ -299,41 +298,14 @@ class vod_zakForm extends State<vod_zak> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => vod_zak1()));
+                          MaterialPageRoute(builder: (_) => const vod_zak1()));
                     },
+                    child: const Text('Заказ водителя 2'),
                   ),
                 ),
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.fire_truck),
-              label: 'Техника',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.subject),
-              label: 'Заказы',
-            ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Водители',
-          ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Профиль',
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentPage,
-          fixedColor: violetColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
         ),
       ),
     );

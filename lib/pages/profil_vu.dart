@@ -12,7 +12,6 @@ class profil_vu extends StatefulWidget {
 
   @override
   profil_vuForm createState() => profil_vuForm();
-
 }
 
 class profil_vuForm extends State<profil_vu> {
@@ -29,7 +28,7 @@ class profil_vuForm extends State<profil_vu> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_green_white.png"),
@@ -47,8 +46,8 @@ class profil_vuForm extends State<profil_vu> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Иван Иванов',
                 style: TextStyle(
@@ -61,23 +60,21 @@ class profil_vuForm extends State<profil_vu> {
             ),
             Container(
                 child: Center(
-                      
-child: SwitchListTile(
-        tileColor: whiteprColor,
-        activeColor: GreenColor,
-        title: const Text('Доступен для заказов'),
-        value: isSwitched,
-        onChanged: (bool? value) {
-          setState(() {
-            isSwitched = value!;
-          });
-        },
-      )
-                )),
+                    child: SwitchListTile(
+              tileColor: whiteprColor,
+              activeColor: GreenColor,
+              title: const Text('Доступен для заказов'),
+              value: isSwitched,
+              onChanged: (bool? value) {
+                setState(() {
+                  isSwitched = value!;
+                });
+              },
+            ))),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Документы',
                 style: TextStyle(
@@ -88,15 +85,16 @@ child: SwitchListTile(
               ),
             ),
             Container(
-            child: Image.asset(
-              'assets/images/plas.png', // путь к изображению
-              width: 189, // ширина изображения
-              height: 119, // высота изображения
-            ),            ),
+              child: Image.asset(
+                'assets/images/plas.png', // путь к изображению
+                width: 189, // ширина изображения
+                height: 119, // высота изображения
+              ),
+            ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Свидетельство регистрации транспорта ',
                 style: TextStyle(
@@ -107,15 +105,16 @@ child: SwitchListTile(
               ),
             ),
             Container(
-            child: Image.asset(
-              'assets/images/plas.png', // путь к изображению
-              width: 189, // ширина изображения
-              height: 119, // высота изображения
-            ),            ),
+              child: Image.asset(
+                'assets/images/plas.png', // путь к изображению
+                width: 189, // ширина изображения
+                height: 119, // высота изображения
+              ),
+            ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Свидетельство регистрации прицепа',
                 style: TextStyle(
@@ -125,39 +124,37 @@ child: SwitchListTile(
                 textAlign: TextAlign.left,
               ),
             ),
-
             Container(
-            child: Image.asset(
-              'assets/images/addv.png', // путь к изображению
-              width: 189, // ширина изображения
-              height: 119, // высота изображения
-            ),            ),
-             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              child: Image.asset(
+                'assets/images/addv.png', // путь к изображению
+                width: 189, // ширина изображения
+                height: 119, // высота изображения
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Сохранить документы'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: GreenColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                onPressed: () {
-                      }
-                ),
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: GreenColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Сохранить документы')),
               ),
-            ),       
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -170,13 +167,13 @@ child: SwitchListTile(
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

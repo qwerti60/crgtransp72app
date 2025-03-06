@@ -3,18 +3,20 @@
 import 'dart:convert';
 
 import 'package:crgtransp72app/design/colors.dart';
-import 'package:crgtransp72app/pages/changerol_page.dart';
+import 'package:crgtransp72app/pages/ads1.dart';
 import 'package:flutter/material.dart';
 
 import '../config.dart';
 import '../design/dimension.dart';
-import 'cities.dart';
+import '111.dart';
+import 'change_user.dart';
+import 'changestatis_page.dart';
 import 'gruz_vodit.dart';
 //import 'profil_page.dart';
-import 'register_screen.dart';
-import 'vod_zak.dart';
+import 'rent_z.dart';
 import 'zprofil_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,13 +28,13 @@ class LoginPage extends StatefulWidget {
 class _LoginState extends State<LoginPage> {
   var login;
   var password;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   void _login() async {
     //var url = 'http://ivnovav.ru/api/autoriz.php';
     var response = await http.post(
-      Uri.parse(Config.baseUrl).replace(path: '/api/autoriz.php'),
+      Uri.parse(Config.baseUrl).replace(path: '/api/autoriz1.php'),
       body: {
         'email': _emailController.text,
         'password': _passwordController.text,
@@ -41,22 +43,33 @@ class _LoginState extends State<LoginPage> {
     );
 
     var json = jsonDecode(response.body);
+    Future<void> saveTokenSecurely(String token) async {
+      //      final storage = new FlutterSecureStorage();
+//        await storage.write(key: '789456123', value: json['token']);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(
+          '789456123', json['token']); // Сохраняем токен под ключом 'token'
+      print(json['token']);
+      print(json['rollNum']);
+    }
 
 // Проверяем rollNum и statNum и переходим на соответствующий экран
-    if (json['success'] != null && json['success']) {
+    if (json['success'] != null && json['success'] && json['token'] != null) {
+      saveTokenSecurely(json['token']);
       // Проверяем rollNum и выполняем навигацию
       switch (json['rollNum']) {
         case 1:
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => zprofil_name()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const change_user()));
+          //  context, MaterialPageRoute(builder: (context) => MyApp()));
           break;
         case 2:
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => zprofil_name()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const zprofil_name()));
           break;
         case 3:
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => gruz_vodit()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const gruz_vodit()));
           break;
         default:
           // Обработка, если rollNum не соответствует ожидаемым значениям
@@ -78,7 +91,7 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Авторизация',
           style: TextStyle(
             color: whiteprColor,
@@ -91,13 +104,13 @@ class _LoginState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Авторизация',
+            const Text('Авторизация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -110,11 +123,11 @@ class _LoginState extends State<LoginPage> {
                   fontSize: 25.0,
                 )),*/
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -133,12 +146,12 @@ class _LoginState extends State<LoginPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -157,12 +170,11 @@ class _LoginState extends State<LoginPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    child: const Text('Войти'),
                     style: TextButton.styleFrom(
                       fixedSize: const Size(double.infinity, 50),
                       foregroundColor: whiteprColor,
@@ -173,37 +185,16 @@ class _LoginState extends State<LoginPage> {
                     ),
                     onPressed: () {
                       _login();
-                    }),
-              ),
-            ),
-            /*Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                    child: const Text('cites'),
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => MyApp()));
-                    }),
+                    },
+                    child: const Text('Войти')),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    child: const Text('Войти как водитель'),
                     style: TextButton.styleFrom(
                       fixedSize: const Size(double.infinity, 50),
                       foregroundColor: whiteprColor,
@@ -214,85 +205,27 @@ class _LoginState extends State<LoginPage> {
                     ),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => zprofil_name()));
-                    }),
+                          MaterialPageRoute(builder: (_) => RentDateForm()));
+                    },
+                    child: const Text('объявы')),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                    child: const Text('Войти как заказчик'),
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => zprofil_name()));
-                    }),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                    child: const Text('Грузы водителя'),
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => gruz_vodit()));
-                    }),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                    child: const Text('Водители заказчика'),
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => vod_zak()));
-                    }),
-              ),
-            ),*/
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 80.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 80.0),
               child: TextButton(
-                child: const Text('Регистрация'),
                 style: TextButton.styleFrom(
                   foregroundColor: blueaccentColor,
                 ),
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => changerol()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const chagestatus(
+                                data: 1,
+                              )));
                 },
+                child: const Text('Регистрация'),
               ),
             ),
           ],

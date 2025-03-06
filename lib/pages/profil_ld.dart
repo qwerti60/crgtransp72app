@@ -12,7 +12,6 @@ class profil_ld extends StatefulWidget {
 
   @override
   profil_ldForm createState() => profil_ldForm();
-
 }
 
 class profil_ldForm extends State<profil_ld> {
@@ -29,7 +28,7 @@ class profil_ldForm extends State<profil_ld> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_green_white.png"),
@@ -47,8 +46,8 @@ class profil_ldForm extends State<profil_ld> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Иван Иванов',
                 style: TextStyle(
@@ -61,23 +60,21 @@ class profil_ldForm extends State<profil_ld> {
             ),
             Container(
                 child: Center(
-                      
-child: SwitchListTile(
-        tileColor: whiteprColor,
-        activeColor: GreenColor,
-        title: const Text('Доступен для заказов'),
-        value: isSwitched,
-        onChanged: (bool? value) {
-          setState(() {
-            isSwitched = value!;
-          });
-        },
-      )
-                )),
+                    child: SwitchListTile(
+              tileColor: whiteprColor,
+              activeColor: GreenColor,
+              title: const Text('Доступен для заказов'),
+              value: isSwitched,
+              onChanged: (bool? value) {
+                setState(() {
+                  isSwitched = value!;
+                });
+              },
+            ))),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Фамилия',
                 style: TextStyle(
@@ -88,10 +85,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -104,8 +101,8 @@ child: SwitchListTile(
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Имя',
                 style: TextStyle(
@@ -116,10 +113,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -133,8 +130,8 @@ child: SwitchListTile(
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Отчеество',
                 style: TextStyle(
@@ -145,10 +142,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -160,10 +157,10 @@ child: SwitchListTile(
                 ),
               ),
             ),
-              Container(
+            Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: const Text(
                 'Опыт работы',
                 style: TextStyle(
@@ -174,10 +171,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -191,8 +188,8 @@ child: SwitchListTile(
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Навыки',
                 style: TextStyle(
@@ -203,10 +200,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -220,8 +217,8 @@ child: SwitchListTile(
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Особенности',
                 style: TextStyle(
@@ -232,10 +229,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -249,8 +246,8 @@ child: SwitchListTile(
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: const Text(
                 'Банковская карта',
                 style: TextStyle(
@@ -262,11 +259,10 @@ child: SwitchListTile(
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                  textAlign: TextAlign.center,
-
+                textAlign: TextAlign.center,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -276,37 +272,33 @@ child: SwitchListTile(
                     borderSide: BorderSide(color: blueaccentColor),
                   ),
                   hintText: '0000 0000 0000 0000',
-              
-                  
                 ),
               ),
             ),
-             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Привязать карту'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: GreenColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                onPressed: () {
-                      }
-                ),
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: GreenColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Привязать карту')),
               ),
-            ),             
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -315,17 +307,23 @@ child: SwitchListTile(
             label: 'Заказы',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            label: 'Водители',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentPage,
+        selectedIconTheme: const IconThemeData(
+            color: violetColor), // Обновлено для актуальных версий Flutter
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

@@ -122,13 +122,13 @@ class _creguser5_nameForm extends State<creguser5_name_> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -136,8 +136,8 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Вид спецтехники',
                 style: TextStyle(
@@ -150,8 +150,8 @@ class _creguser5_nameForm extends State<creguser5_name_> {
             ),
             Container(
               height: 60,
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.black38, width: 2),
@@ -159,12 +159,12 @@ class _creguser5_nameForm extends State<creguser5_name_> {
               ),
 // Step 2.
               child: _vidt.isEmpty
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         DropdownButton(
-                          hint: Text(
+                          hint: const Text(
                             'Выберите вид спецтехники',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -185,7 +185,7 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                               value: vidt['name'],
                               child: Text(
                                 vidt['name'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38,
                                   fontSize: 16.0,
@@ -198,12 +198,11 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                     ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -240,7 +239,7 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                                     shkuzov: '',
                                     vidk: '',
                                   )));
-                    } else
+                    } else {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -260,7 +259,9 @@ class _creguser5_nameForm extends State<creguser5_name_> {
                                     kppStr: kppStr,
                                     vidt: _selectedVidt!,
                                   )));
+                    }
                   },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),

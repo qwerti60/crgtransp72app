@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 
-
 class profil_m extends StatefulWidget {
   const profil_m({super.key});
 
   @override
   profil_mForm createState() => profil_mForm();
-
 }
 
 class profil_mForm extends State<profil_m> {
- // var _currentPage = 0;
+  // var _currentPage = 0;
   var _currentPage = 0;
   bool isSwitched = false;
   @override
@@ -20,25 +18,24 @@ class profil_mForm extends State<profil_m> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreenColor,
-          iconTheme: IconThemeData(
-    color: whiteprColor
-  ),
-          centerTitle: true,
-          title: Column(
-            children: [
-              Text(
-                'Маршрут и груз',
-                style: TextStyle(color: whiteprColor, fontSize: 18),
-              ),
-              Text(
-                '№04294354',
-                style: TextStyle(color: whiteprColor, fontSize: 14),
-              ),
-            ],
-          ),
+        iconTheme: const IconThemeData(color: whiteprColor),
+        centerTitle: true,
+        title: const Column(
+          children: [
+            Text(
+              'Маршрут и груз',
+              style: TextStyle(color: whiteprColor, fontSize: 18),
+            ),
+            Text(
+              '№04294354',
+              style: TextStyle(color: whiteprColor, fontSize: 14),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite, color: Colors.white), // Иконка лайка
+            icon:
+                const Icon(Icons.favorite, color: Colors.white), // Иконка лайка
             onPressed: () {
               // Действие при нажатии иконки
             },
@@ -50,146 +47,155 @@ class profil_mForm extends State<profil_m> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-                          Container(
-            child: Image.asset(
-              'assets/images/map.png', // путь к изображению
-            ),            ),
-                          Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                // Первый текст выровнен слева
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Санкт-Петербург'),
-                  ),
+            Container(
+              child: Image.asset(
+                'assets/images/map.png', // путь к изображению
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    // Первый текст выровнен слева
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Санкт-Петербург'),
+                      ),
+                    ),
+                    // Картинка выровнена по центру
+                    Image.asset(
+                      'assets/images/strelkaleft.png', // путь к изображению
+                    ),
+                    // Второй текст выровнен справа
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('Москва'),
+                      ),
+                    ),
+                  ],
                 ),
-                // Картинка выровнена по центру
-                Image.asset(
-                  'assets/images/strelkaleft.png', // путь к изображению
+              ),
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Загрузка 13.04.24 "),
+                    Text("с 10:00 до 18:00"),
+                  ],
                 ),
-                // Второй текст выровнен справа
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Москва'),
-                  ),
+              ),
+            ),
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Выгрузка 17.04.24"),
+                    Text("с 10:00 до 18:00"),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),            ),             
-                        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Загрузка 13.04.24 "),
-                Text("с 10:00 до 18:00"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Описание: "),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Выгрузка 17.04.24"),
-                Text("с 10:00 до 18:00"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Строительные материалы на паллетах 20 шт."),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Описание: "),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Тип кузова"),
+                    Text("Тентованный"),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-              Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Строительные материалы на паллетах 20 шт."),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Вес, т."),
+                    Text("11 т."),
+                  ],
+                ),
+              ),
             ),
-          ),          ),     
-               Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Тип кузова"),
-                Text("Тентованный"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Загрузка"),
+                    Text("Бортовая"),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-                Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Вес, т."),
-                Text("11 т."),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Тип груза:"),
+                    Text("Штучный"),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-                Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Загрузка"),
-                Text("Бортовая"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("703 км"),
+                    Text("80 р./км"),
+                    Text("44 444 р.",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: GreenColor,
+                        )),
+                  ],
+                ),
+              ),
             ),
-          ),          ),             
-                 Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Тип груза:"),
-                Text("Штучный"),
-           ],
-            ),
-          ),          ),             
-                  Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("703 км"),
-                Text("80 р./км"),
-                   Text("44 444 р.",                
-                  style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color:  GreenColor,
-                )),
-           ],
-            ),
-          ),          ),             
-              
-               Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Отменить заявку'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -198,17 +204,17 @@ class profil_mForm extends State<profil_m> {
                     shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
-                onPressed: () {
-                },
+                  onPressed: () {},
+                  child: const Text('Отменить заявку'),
                 ),
               ),
-            ),     
+            ),
           ],
         ),
-      ),       
-            bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -221,13 +227,13 @@ class profil_mForm extends State<profil_m> {
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

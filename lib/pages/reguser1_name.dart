@@ -77,13 +77,13 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   color: whiteprColor,
                   fontSize: fontSize30,
                 )),
-            Text('$strData',
-                style: TextStyle(color: whiteprColor, fontSize: 24)),
+            Text(strData,
+                style: const TextStyle(color: whiteprColor, fontSize: 24)),
           ],
         ),
         toolbarHeight: 72, // Опционально: регулировка высоты AppBar
@@ -94,13 +94,13 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -108,8 +108,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Имя',
                 style: TextStyle(
@@ -121,11 +121,11 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
                 controller: _firstNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -141,8 +141,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Отчество',
                 style: TextStyle(
@@ -154,11 +154,11 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
                 controller: _middleNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -174,8 +174,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Фамилия',
                 style: TextStyle(
@@ -187,11 +187,11 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
                 controller: _lastNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -207,8 +207,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Адрес',
                 style: TextStyle(
@@ -222,20 +222,20 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
             // Получайте ширину экрана с контекстом.
 
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.black38, width: 2),
                 color: grayprprColor,
               ),
               child: _cities.isEmpty
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         DropdownButton(
-                          hint: Text(
+                          hint: const Text(
                             'Выберите город(населенный пункт',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -256,7 +256,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                               value: city['name'],
                               child: Text(
                                 city['name'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black38,
                                   fontSize: 16.0,
@@ -269,12 +269,11 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                     ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -294,7 +293,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                         _selectedCity == null) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                               'Пожалуйста, заполните все поля и выберите город.'),
                         ),
@@ -304,8 +303,8 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => creguser3_name(
-                            rolNum: rolNum,
+                          builder: (context) => creguser3name(
+                            // rolNum: rolNum,
                             statNum: statNum,
                             firstName: firstName,
                             middleName: middleName,
@@ -317,6 +316,7 @@ class _Creguser1_NameForm extends State<Creguser1_Name> {
                       );
                     }
                   },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),

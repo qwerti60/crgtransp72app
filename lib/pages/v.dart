@@ -3,28 +3,32 @@ import 'package:flutter/material.dart';
 import '../design/colors.dart';
 
 class MyVApp extends StatelessWidget {
+  const MyVApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160.0), // Высота двух строк
+        preferredSize: const Size.fromHeight(160.0), // Высота двух строк
         child: AppBar(
           backgroundColor: Colors.green,
           flexibleSpace: Column(
             children: [
 // Первая строка
               Padding(
-padding: const EdgeInsets.symmetric(vertical:  40.0),
-                child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 40.0),
+                child: SizedBox(
                   height: 40.0,
                   child: TextField(
                     decoration: InputDecoration(
@@ -35,49 +39,49 @@ padding: const EdgeInsets.symmetric(vertical:  40.0),
                         borderSide: BorderSide.none,
                       ),
                       hintText: 'Поиск',
-                      suffixIcon: Icon(Icons.search),
+                      suffixIcon: const Icon(Icons.search),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 6.0), 
+              const SizedBox(height: 6.0),
 // Вторая строка
               Padding(
-padding: const EdgeInsets.symmetric(vertical:  5.0),
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: Row(
- //.                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //.                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () {
 // Действие для кнопки "Фильтр"
                         },
-                        child: Text("Фильтр"),
                         style: OutlinedButton.styleFrom(
-                    foregroundColor:  blackprColor,
-                    backgroundColor:whiteprColor,
-                    disabledForegroundColor: whiteprColor,
+                          foregroundColor: blackprColor,
+                          backgroundColor: whiteprColor,
+                          disabledForegroundColor: whiteprColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
+                        child: const Text("Фильтр"),
                       ),
                     ),
-                    SizedBox(width: 8.0),
+                    const SizedBox(width: 8.0),
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () {
 // Действие для кнопки "Мои заказы"
                         },
-                        child: Text("Мои заказы"),
                         style: OutlinedButton.styleFrom(
-                    foregroundColor:  blackprColor,
-                    backgroundColor:whiteprColor,
-                    disabledForegroundColor: whiteprColor,
+                          foregroundColor: blackprColor,
+                          backgroundColor: whiteprColor,
+                          disabledForegroundColor: whiteprColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
+                        child: const Text("Мои заказы"),
                       ),
                     ),
                   ],
@@ -87,7 +91,7 @@ padding: const EdgeInsets.symmetric(vertical:  5.0),
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text("Ваше основное содержимое здесь"),
       ),
     );

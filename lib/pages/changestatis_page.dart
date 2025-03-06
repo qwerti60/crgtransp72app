@@ -7,7 +7,7 @@ import 'reguser1_name.dart';
 class chagestatus extends StatefulWidget {
   final int data;
 
-  chagestatus({required this.data});
+  const chagestatus({super.key, required this.data});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -31,6 +31,9 @@ class _changestatusForm extends State<chagestatus> {
     } else if (widget.data == 3) {
       strData = 'усл. спецтехн';
       RolNum = 3;
+    } else if (widget.data == 4) {
+      strData = 'усл. грузчиков';
+      RolNum = 4;
     }
   }
 
@@ -44,13 +47,13 @@ class _changestatusForm extends State<chagestatus> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Выбор статуса',
+            const Text('Выбор статуса',
                 style: TextStyle(
                   color: whiteprColor,
                   fontSize: fontSize30,
                 )),
-            Text('$strData',
-                style: TextStyle(color: whiteprColor, fontSize: 24)),
+            Text(strData,
+                style: const TextStyle(color: whiteprColor, fontSize: 24)),
           ],
         ),
         toolbarHeight: 72, // Опционально: регулировка высоты AppBar
@@ -70,13 +73,13 @@ class _changestatusForm extends State<chagestatus> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Выберите статус',
+            const Text('Выберите статус',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -93,7 +96,7 @@ class _changestatusForm extends State<chagestatus> {
                       groupValue: _value,
                       activeColor:
                           blueaccentColor, // Change the active radio button color here
-                      fillColor: MaterialStateProperty.all(
+                      fillColor: WidgetStateProperty.all(
                           blueaccentColor), // Change the fill color when selected
                       splashRadius: 25, // Change the splash radius when clicked
                       onChanged: (int? value) {
@@ -110,7 +113,7 @@ class _changestatusForm extends State<chagestatus> {
                       groupValue: _value,
                       activeColor:
                           blueaccentColor, // Change the active radio button color here
-                      fillColor: MaterialStateProperty.all(
+                      fillColor: WidgetStateProperty.all(
                           blueaccentColor), // Change the fill color when selected
                       splashRadius: 25, // Change the splash radius when clicked
                       onChanged: (int? value) {
@@ -124,12 +127,11 @@ class _changestatusForm extends State<chagestatus> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -146,6 +148,7 @@ class _changestatusForm extends State<chagestatus> {
                             builder: (context) => Creguser1_Name(
                                 RolNum: RolNum, StatNum: StatNum)));
                   },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),

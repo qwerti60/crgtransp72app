@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class vievdata extends StatefulWidget {
+  const vievdata({super.key});
+
   @override
   _vievdataState createState() => _vievdataState();
 }
@@ -33,7 +35,7 @@ class _vievdataState extends State<vievdata> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Users List'),
+          title: const Text('Users List'),
         ),
         body: ListView.builder(
           itemCount: users.length,

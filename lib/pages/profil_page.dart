@@ -19,7 +19,6 @@ class profil_name extends StatefulWidget {
 
   @override
   profil_nameForm createState() => profil_nameForm();
-
 }
 
 class profil_nameForm extends State<profil_name> {
@@ -36,7 +35,7 @@ class profil_nameForm extends State<profil_name> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_green_white.png"),
@@ -54,8 +53,8 @@ class profil_nameForm extends State<profil_name> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Иван Иванов',
                 style: TextStyle(
@@ -68,110 +67,105 @@ class profil_nameForm extends State<profil_name> {
             ),
             Container(
                 child: Center(
-                      
-child: SwitchListTile(
-        tileColor: whiteprColor,
-        activeColor: GreenColor,
-        title: const Text('Доступен для заказов'),
-        value: isSwitched,
-        onChanged: (bool? value) {
-          setState(() {
-            isSwitched = value!;
-          });
-        },
-      )
-                )),
+                    child: SwitchListTile(
+              tileColor: whiteprColor,
+              activeColor: GreenColor,
+              title: const Text('Доступен для заказов'),
+              value: isSwitched,
+              onChanged: (bool? value) {
+                setState(() {
+                  isSwitched = value!;
+                });
+              },
+            ))),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: TexticonsColor,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const profil_transport()));
+                },
                 child: const Text('Транспорт'),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: TexticonsColor,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => profil_transport()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const profil_otkl()));
                 },
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: TextButton(
                 child: const Text('Мои отклики'),
-                style: TextButton.styleFrom(
-                  foregroundColor: TexticonsColor,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => profil_otkl()));
-                },
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                child: const Text('Личные данные'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: TexticonsColor,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const profil_ld()));
+                  },
+                  child: const Text('Личные данные')),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: TexticonsColor,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const profil_vu()));
+                  },
+                  child: const Text('Документы')),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: TexticonsColor,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const profile_izbrannoe()));
+                  },
+                  child: const Text('Избранное')),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 40.0),
+              child: TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: TexticonsColor,
                 ),
-                onPressed: () {
-                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) =>profil_ld()));
-                } 
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: TextButton(
-                child: const Text('Документы'),
-                style: TextButton.styleFrom(
-                  foregroundColor: TexticonsColor,
-                ),
-                onPressed: () {
-                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) =>profil_vu()));
-                } 
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
-              child: TextButton(
-                child: const Text('Избранное'),
-                style: TextButton.styleFrom(
-                  foregroundColor: TexticonsColor,
-                ),
-                onPressed: () {
-                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) =>profile_izbrannoe()));
-                } 
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 40.0),
-              child: TextButton(
+                onPressed: () => _showExitConfirmationDialog(context),
                 child: const Text('Выйти из аккаунта'),
-                style: TextButton.styleFrom(
-                  foregroundColor: TexticonsColor,
-                ),
-      onPressed: () => _showExitConfirmationDialog(context),
               ),
             ),
-
-
           ],
         ),
       ),
-
-
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -184,44 +178,42 @@ child: SwitchListTile(
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }
 }
 
 class _showExitConfirmationDialog {
-  _showExitConfirmationDialog(BuildContext context){
+  _showExitConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Выход'),
-          content: Text('Вы уверены, что хотите выйти?'),
+          title: const Text('Выход'),
+          content: const Text('Вы уверены, что хотите выйти?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Нет'),
+              child: const Text('Нет'),
               onPressed: () {
                 Navigator.of(context).pop(); // Закрыть диалоговое окно
               },
             ),
             TextButton(
-              child: Text('Да'),
+                child: const Text('Да'),
                 onPressed: () {
-                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) =>LoginPage()));
-                } 
-            ),
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const LoginPage()));
+                }),
           ],
         );
       },
     );
   }
-  
 }

@@ -12,34 +12,29 @@ class profil_nameForm extends State<profil_name> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-
- body: SingleChildScrollView(
-  child: Container(
-        width: double.infinity,
-        height: 200,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/bgcolor_head_green_white.png"),
-            fit: BoxFit.fill,
+        body: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            height: 200,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/bgcolor_head_green_white.png"),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: SizedBox(
+              height: 100.0,
+              child: Image.asset(
+                'assets/images/fotouser.png', // путь к изображению
+                width: 100, // ширина изображения
+                height: 100, // высота изображения
+              ),
+            ),
           ),
         ),
-                  child: 
-            SizedBox(height: 100.0,
-            child: Image.asset(
-              'assets/images/fotouser.png', // путь к изображению
-              width: 100, // ширина изображения
-              height: 100, // высота изображения
-
-           ),
-
-            ),
-  ),
-  
-      ),
-
         bottomNavigationBar: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.fire_truck),
               label: 'Техника',
             ),

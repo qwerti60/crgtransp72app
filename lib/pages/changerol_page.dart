@@ -1,8 +1,9 @@
 import 'package:crgtransp72app/design/colors.dart';
+import 'package:crgtransp72app/pages/add_ob_vidt.dart';
+import 'package:crgtransp72app/pages/add_ob_gp1.dart';
 import 'package:flutter/material.dart';
 
-import '../design/dimension.dart';
-import 'changestatis_page.dart';
+import 'add_ob_gr.dart';
 
 class changerol extends StatefulWidget {
   const changerol({super.key});
@@ -15,6 +16,7 @@ class changerol extends StatefulWidget {
 class _changerolForm extends State<changerol> {
   int _valueRole = 1;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -31,39 +33,10 @@ class _changerolForm extends State<changerol> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
-            Image.asset(
-              'assets/images/logo.png', // путь к изображению
-              width: 189, // ширина изображения
-              height: 119, // высота изображения
-            ),
-            Text('Выберите свою роль',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: blackprColor,
-                  fontSize: fontSize30,
-                )),
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  ListTile(
-                    title: const Text('Заказчик'),
-                    leading: Radio<int>(
-                      value: 1,
-                      groupValue: _valueRole,
-                      activeColor:
-                          blueaccentColor, // Change the active radio button color here
-                      fillColor: MaterialStateProperty.all(
-                          blueaccentColor), // Change the fill color when selected
-                      splashRadius: 20, // Change the splash radius when clicked
-                      onChanged: (int? value) {
-                        setState(() {
-                          _valueRole = value!;
-                        });
-                      },
-                    ),
-                  ),
                   ListTile(
                     title: const Text('Грузоперевозчик'),
                     leading: Radio<int>(
@@ -71,7 +44,7 @@ class _changerolForm extends State<changerol> {
                       groupValue: _valueRole,
                       activeColor:
                           blueaccentColor, // Change the active radio button color here
-                      fillColor: MaterialStateProperty.all(
+                      fillColor: WidgetStateProperty.all(
                           blueaccentColor), // Change the fill color when selected
                       splashRadius: 25, // Change the splash radius when clicked
                       onChanged: (int? value) {
@@ -88,7 +61,24 @@ class _changerolForm extends State<changerol> {
                       groupValue: _valueRole,
                       activeColor:
                           blueaccentColor, // Change the active radio button color here
-                      fillColor: MaterialStateProperty.all(
+                      fillColor: WidgetStateProperty.all(
+                          blueaccentColor), // Change the fill color when selected
+                      splashRadius: 25, // Change the splash radius when clicked
+                      onChanged: (int? value) {
+                        setState(() {
+                          _valueRole = value!;
+                        });
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Услуги грузчиков'),
+                    leading: Radio<int>(
+                      value: 4,
+                      groupValue: _valueRole,
+                      activeColor:
+                          blueaccentColor, // Change the active radio button color here
+                      fillColor: WidgetStateProperty.all(
                           blueaccentColor), // Change the fill color when selected
                       splashRadius: 25, // Change the splash radius when clicked
                       onChanged: (int? value) {
@@ -102,12 +92,11 @@ class _changerolForm extends State<changerol> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: whiteprColor,
@@ -117,13 +106,32 @@ class _changerolForm extends State<changerol> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => chagestatus(data: _valueRole),
-                      ),
-                    );
+                    if (_valueRole == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const add_ob_gp(),
+                        ),
+                      );
+                    }
+                    if (_valueRole == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const add_ob_vidt(),
+                        ),
+                      );
+                    }
+                    if (_valueRole == 4) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const add_ob_gr(),
+                        ),
+                      );
+                    }
                   },
+                  child: const Text('Продолжить'),
                 ),
               ),
             ),

@@ -12,9 +12,7 @@ import 'dart:convert';
 import 'reguser5_page_.dart';
 import 'reguser_name.dart';
 
-//class creguser3_name extends StatefulWidget {
-
-class creguser3_name extends StatelessWidget {
+class creguser3name extends StatefulWidget {
   final int rollNum;
   final int statNum;
   final String firstName;
@@ -22,21 +20,28 @@ class creguser3_name extends StatelessWidget {
   final String middleName;
   final String city;
 
-  creguser3_name(
-      {required this.rollNum,
-      required this.statNum,
-      required this.firstName,
-      required this.lastName,
-      required this.middleName,
-      required this.city,
-      required int rolNum});
+  const creguser3name({
+    super.key,
+    required this.rollNum,
+    required this.statNum,
+    required this.firstName,
+    required this.lastName,
+    required this.middleName,
+    required this.city,
+  });
+
+  @override
+  _CregUser3NameState createState() => _CregUser3NameState();
+}
+
+class _CregUser3NameState extends State<creguser3name> {
+  late final TextEditingController phoneController = TextEditingController();
+  late final TextEditingController emailController = TextEditingController();
+  late final TextEditingController passwordController = TextEditingController();
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _phoneController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -52,13 +57,13 @@ class creguser3_name extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Image.asset(
               'assets/images/logo.png', // путь к изображению
               width: 189, // ширина изображения
               height: 119, // высота изображения
             ),
-            Text('Регистрация',
+            const Text('Регистрация',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: blackprColor,
@@ -66,8 +71,8 @@ class creguser3_name extends StatelessWidget {
                 )),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Номер телефона',
                 style: TextStyle(
@@ -79,11 +84,11 @@ class creguser3_name extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
+                controller: phoneController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -105,8 +110,8 @@ class creguser3_name extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Эл. почта',
                 style: TextStyle(
@@ -118,11 +123,11 @@ class creguser3_name extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
+                controller: emailController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -144,8 +149,8 @@ class creguser3_name extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
                 'Пароль',
                 style: TextStyle(
@@ -157,11 +162,11 @@ class creguser3_name extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
+                controller: passwordController,
+                decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -182,14 +187,38 @@ class creguser3_name extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
+              child: CheckboxListTile(
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero, // Убираем отступ, если нужно
+                title: GestureDetector(
+                  onTap: () {},
+                  child: const Text(
+                    "Принять пользовательское соглашение",
+                    style: TextStyle(
+                      color: Colors.blue, // Цвет текста-ссылки
+                      decoration: TextDecoration
+                          .underline, // Подчеркивание как у ссылок
+                    ),
+                  ),
+                ),
+                value: _isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isChecked = value!;
+                  });
+                },
+                activeColor: Colors.blue, // Цвет галочки при активации
+                checkColor: Colors.white, // Цвет флажка галочки
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 30.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: Text(rollNum == 1 && statNum == 2
-                      ? 'Регистрация'
-                      : 'Продолжить'),
                   style: TextButton.styleFrom(
                     fixedSize: const Size(double.infinity, 50),
                     foregroundColor: Colors.white,
@@ -200,7 +229,7 @@ class creguser3_name extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    bool _validateEmail(String email) {
+                    bool validateEmail(String email) {
                       // Регулярное выражение для синтаксической проверки email
                       String pattern =
                           r'^[a-zA-Z0-9]+([._\-\+]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\.[a-zA-Z]{2,})+$';
@@ -208,65 +237,68 @@ class creguser3_name extends StatelessWidget {
                       return regex.hasMatch(email);
                     }
 
-                    bool _validatePhone(String phone) {
+                    bool validatePhone(String phone) {
                       final RegExp regex = RegExp(r'^\+?[0-9]{10,15}$');
                       return regex.hasMatch(phone);
                     }
 
-                    bool _validatePassword(String password) {
+                    bool validatePassword(String password) {
                       final RegExp regex =
                           RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
                       return regex.hasMatch(password);
                     }
 
-                    String phone = _phoneController.text;
-                    String email = _emailController.text;
-                    String password = _passwordController.text;
+                    String phone = phoneController.text;
+                    String email = emailController.text;
+                    String password = passwordController.text;
 
-                    if (phone.isEmpty ||
-                        email.isEmpty ||
-                        password.isEmpty == null) {
+                    if (phone.isEmpty || email.isEmpty) {
 // Если хотя бы одно поле пустое, показываем осведомительное сообщение
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                               'Пожалуйста, заполните все поля и выберите город.'),
                         ),
                       );
                       return;
-                    } else if (!_validatePhone(phone)) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    } else if (!validatePhone(phone)) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Введите корректный номер телефона')));
                       return;
-                    } else if (!_validateEmail(email)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Введите корректный email')));
+                    } else if (!validateEmail(email)) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Введите корректный email')));
                       return;
-                    } else if (!_validatePassword(password)) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    } else if (!validatePassword(password)) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
                               'Пароль должен быть не менее 8 символов, содержать буквы и цифры')));
                       return;
+                    } else if (_isChecked == false) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Примте пользовательское соглашение')));
+                      return;
                     }
-                    if (rollNum == 1 && statNum == 2) {
+                    if ((widget.rollNum == 1 && widget.statNum == 2) ||
+                        (widget.rollNum == 4 && widget.statNum == 2)) {
                       final response = await http.post(
                         Uri.parse(Config.baseUrl)
                             .replace(path: '/api/regtest.php'),
                         body: json.encode({
-                          'email': _emailController.text,
-                          'password': _passwordController.text,
-                          'phone': _phoneController.text,
-                          'rollNum':
-                              rollNum, // пример данных из предыдущего окна
-                          'statNum':
-                              statNum, // пример данных из предыдущего окна
-                          'firstName':
-                              firstName, // пример данных из предыдущего окна
-                          'lastName':
-                              lastName, // пример данных из предыдущего окна
-                          'middleName':
-                              middleName, // пример данных из предыдущего окна
-                          'city': city,
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                          'phone': phoneController.text,
+                          'rollNum': widget
+                              .rollNum, // пример данных из предыдущего окна
+                          'statNum': widget
+                              .statNum, // пример данных из предыдущего окна
+                          'firstName': widget
+                              .firstName, // пример данных из предыдущего окна
+                          'lastName': widget
+                              .lastName, // пример данных из предыдущего окна
+                          'middleName': widget
+                              .middleName, // пример данных из предыдущего окна
+                          'city': widget.city,
                         }),
                       );
 
@@ -277,41 +309,43 @@ class creguser3_name extends StatelessWidget {
                             SnackBar(content: Text(responseData['message'])));
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Регистрация успешна')));
+                            const SnackBar(
+                                content: Text('Регистрация успешна')));
                       }
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => LoginPage()));
+                          MaterialPageRoute(builder: (_) => const LoginPage()));
                     }
-                    if ((rollNum == 1 && statNum == 1) ||
-                        (rollNum == 2 && statNum == 1) ||
-                        (rollNum == 3 && statNum == 1)) {
+                    if ((widget.rollNum == 1 && widget.statNum == 1) ||
+                        (widget.rollNum == 2 && widget.statNum == 1) ||
+                        (widget.rollNum == 3 && widget.statNum == 1) ||
+                        (widget.rollNum == 4 && widget.statNum == 1)) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => creguser4_name_(
-                              rollNum: rollNum,
-                              statNum: statNum,
-                              firstName: firstName,
-                              middleName: middleName,
-                              lastName: lastName,
-                              city: city,
+                              rollNum: widget.rollNum,
+                              statNum: widget.statNum,
+                              firstName: widget.firstName,
+                              middleName: widget.middleName,
+                              lastName: widget.lastName,
+                              city: widget.city,
                               phone: phone,
                               email: email,
                               password: password),
                         ),
                       );
                     }
-                    if ((rollNum == 2 && statNum == 2)) {
+                    if ((widget.rollNum == 2 && widget.statNum == 2)) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => creguser_name(
-                              rollNum: rollNum,
-                              statNum: statNum,
-                              firstName: firstName,
-                              middleName: middleName,
-                              lastName: lastName,
-                              city: city,
+                              rollNum: widget.rollNum,
+                              statNum: widget.statNum,
+                              firstName: widget.firstName,
+                              middleName: widget.middleName,
+                              lastName: widget.lastName,
+                              city: widget.city,
                               phone: phone,
                               email: email,
                               password: password,
@@ -323,17 +357,17 @@ class creguser3_name extends StatelessWidget {
                         ),
                       );
                     }
-                    if (rollNum == 3 && statNum == 2) {
+                    if (widget.rollNum == 3 && widget.statNum == 2) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) => creguser5_name_(
-                                    rollNum: rollNum,
-                                    statNum: statNum,
-                                    firstName: firstName,
-                                    middleName: middleName,
-                                    lastName: lastName,
-                                    city: city,
+                                    rollNum: widget.rollNum,
+                                    statNum: widget.statNum,
+                                    firstName: widget.firstName,
+                                    middleName: widget.middleName,
+                                    lastName: widget.lastName,
+                                    city: widget.city,
                                     phone: phone,
                                     email: email,
                                     password: password,
@@ -344,6 +378,10 @@ class creguser3_name extends StatelessWidget {
                                   )));
                     }
                   },
+                  child: Text((widget.rollNum == 1 && widget.statNum == 2) ||
+                          (widget.rollNum == 4 && widget.statNum == 2)
+                      ? 'Регистрация'
+                      : 'Продолжить'),
                 ),
               ),
             ),

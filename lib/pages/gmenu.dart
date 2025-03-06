@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 
-
 class gmenu extends StatefulWidget {
   const gmenu({super.key});
 
   @override
   gmenuForm createState() => gmenuForm();
-
 }
 
 class gmenuForm extends State<gmenu> {
@@ -17,10 +15,9 @@ class gmenuForm extends State<gmenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -33,13 +30,13 @@ class gmenuForm extends State<gmenu> {
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

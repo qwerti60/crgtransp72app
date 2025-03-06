@@ -20,9 +20,9 @@ class zprofil_mForm extends State<zprofil_m> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: violetColor,
-        iconTheme: IconThemeData(color: whiteprColor),
+        iconTheme: const IconThemeData(color: whiteprColor),
         centerTitle: true,
-        title: Column(
+        title: const Column(
           children: [
             Text(
               'Маршрут и груз',
@@ -36,7 +36,7 @@ class zprofil_mForm extends State<zprofil_m> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete, color: Colors.white), // Иконка лайка
+            icon: const Icon(Icons.delete, color: Colors.white), // Иконка лайка
             onPressed: () {
               // Действие при нажатии иконки
             },
@@ -50,11 +50,11 @@ class zprofil_mForm extends State<zprofil_m> {
           children: [
             Container(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   children: [
                     // Первый текст выровнен слева
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text('Санкт-Петербург'),
@@ -65,7 +65,7 @@ class zprofil_mForm extends State<zprofil_m> {
                       'assets/images/strelkaleft.png', // путь к изображению
                     ),
                     // Второй текст выровнен справа
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text('Москва'),
@@ -76,8 +76,8 @@ class zprofil_mForm extends State<zprofil_m> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -87,8 +87,8 @@ class zprofil_mForm extends State<zprofil_m> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -98,8 +98,8 @@ class zprofil_mForm extends State<zprofil_m> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -109,17 +109,17 @@ class zprofil_mForm extends State<zprofil_m> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Center(
-                child:  CustomLayout(),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: const Center(
+                child: CustomLayout(),
               ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),

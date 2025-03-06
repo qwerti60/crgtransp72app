@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomLayout extends StatelessWidget {
+  const CustomLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,7 +14,8 @@ class CustomLayout extends StatelessWidget {
             // Вертикальная линия
             Container(
               width: 2,
-              height: 100, // Высота подбирается в зависимости от содержания и желаемого вида
+              height:
+                  100, // Высота подбирается в зависимости от содержания и желаемого вида
               color: Colors.black,
             ),
             // Серая точка сверху
@@ -21,7 +24,7 @@ class CustomLayout extends StatelessWidget {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.grey,
                 ),
@@ -38,61 +41,58 @@ class CustomLayout extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(width: 10), // Отступ между линией и текстом
+        const SizedBox(width: 10), // Отступ между линией и текстом
         // Правая часть с фразами
         Column(
-
-         crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-              Container(
-
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Прибытие"),
-                Text("17.04"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Прибытие"),
+                    Text("17.04"),
+                  ],
+                ),
+              ),
             ),
-          ),          ), 
-              Container(      
-
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Москва"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Москва"),
+                  ],
+                ),
+              ),
             ),
-          ),          ), 
-              Container(       
-
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Отправление"),
-                Text("13.04"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Отправление"),
+                    Text("13.04"),
+                  ],
+                ),
+              ),
             ),
-          ),          ), 
-              Container(    
-
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Санкт-Петербург"),
-                Text("14:40"),
-              ],
+            Container(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("Санкт-Петербург"),
+                    Text("14:40"),
+                  ],
+                ),
+              ),
             ),
-          ),          ), 
-
-
           ],
         ),
       ],
@@ -104,7 +104,7 @@ class CustomRow extends StatelessWidget {
   final String leftText;
   final String rightText;
 
-  CustomRow({required this.leftText, required this.rightText});
+  const CustomRow({super.key, required this.leftText, required this.rightText});
 
   @override
   Widget build(BuildContext context) {

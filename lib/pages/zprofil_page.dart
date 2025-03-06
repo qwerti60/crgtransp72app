@@ -1,17 +1,19 @@
-
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
 import '../design/colors.dart';
-
+import 'ads1.dart';
+import 'ads2.dart';
 import 'loginpage.dart';
+import 'rent_z.dart';
+import 'subscription_screen.dart';
+import 'zakaz_screen.dart';
 import 'zprofil_ld.dart';
 import 'zprofil_zakaz.dart';
 import 'zprofile_izbrannoe.dart';
-
-//import 'reguser2_page_.dart';
-
-// Step 1.
-String dropdownValue = 'Абатское';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class zprofil_name extends StatefulWidget {
   const zprofil_name({super.key});
@@ -21,8 +23,62 @@ class zprofil_name extends StatefulWidget {
 }
 
 class zprofil_nameForm extends State<zprofil_name> {
-  var _currentPage = 0;
+  final _currentPage = 0;
   bool isSwitched = false;
+  Uint8List? fotouser;
+  String firstName = '';
+  String lastName = '';
+  String middleName = '';
+  String city = '';
+  String phone = '';
+  String email = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    final token = await getSecureToken(); // Await the secure token
+    if (token == null) {
+      print("Token is null");
+      return;
+    }
+    final response = await http
+        .get(Uri.parse('https://ivnovav.ru/api/getuserinfo.php?token=$token'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['error'] != null) {
+        print('Ошибка: ${data['error']}');
+      } else {
+        // Обновляем поля класса и UI
+        setState(() {
+          firstName = data['firstName'];
+          lastName = data['lastName'];
+          middleName = data['middleName'];
+          city = data['city'];
+          phone = data['phone'];
+          email = data['email'];
+          // Проверяем, есть ли изображение пользователя и преобразуем его из base64.
+          fotouser =
+              data['fotouser'] != null ? base64Decode(data['fotouser']) : null;
+        });
+
+        // Теперь переменные firstName, lastName, middleName, и userfoto доступны для использования в build() методе.
+      }
+    } else {
+      print('Ошибка при получении данных пользователя');
+    }
+  }
+
+  Future<String?> getSecureToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('789456123'); // Получаем токен
+    return token;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,29 +90,37 @@ class zprofil_nameForm extends State<zprofil_name> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_blue_white.png"),
                   fit: BoxFit.fill,
                 ),
               ),
-              child: SizedBox(
-                height: 100.0,
-                child: Image.asset(
-                  'assets/images/fotouser.png', // путь к изображению
-                  width: 100, // ширина изображения
-                  height: 100, // высота изображения
+              child: Center(
+                // Центрируем изображение
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: fotouser != null
+                      ? Image.memory(
+                          fotouser!,
+                          // fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/images/fotouser.png',
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
-              child: const Text(
-                'Иван Иванов',
-                style: TextStyle(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
+              child: Text(
+                '$firstName $lastName', // Интерполяция используется для вставки значений
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black38,
                   fontSize: 16.0,
@@ -65,85 +129,97 @@ class zprofil_nameForm extends State<zprofil_name> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                  child: const Text('Личные данные'),
                   style: TextButton.styleFrom(
                     foregroundColor: TexticonsColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => zprofil_ld()));
-                  }),
+                        MaterialPageRoute(builder: (_) => const zprofil_ld()));
+                  },
+                  child: const Text('Личные данные')),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                  child: const Text('Статус заказа'),
                   style: TextButton.styleFrom(
                     foregroundColor: TexticonsColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => zprofil_zakaz()));
-                  }),
+                        MaterialPageRoute(builder: (_) => const Ads2App()));
+                  },
+                  child: const Text('Мои объявления')),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                  child: const Text('Избранное'),
                   style: TextButton.styleFrom(
                     foregroundColor: TexticonsColor,
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => zprofile_izbrannoe()));
-                  }),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const zprofil_zakaz()));
+                  },
+                  child: const Text('Статус заказа')),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 40.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                child: const Text('Выйти из аккаунта'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: TexticonsColor,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const zprofile_izbrannoe()));
+                  },
+                  child: const Text('Избранное')),
+            ),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 40.0),
+              child: TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: TexticonsColor,
                 ),
                 onPressed: () => _showExitConfirmationDialog(context),
+                child: const Text('Выйти из аккаунта'),
               ),
             ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: blueaccentColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => RentDateForm()));
+                    },
+                    child: const Text('MyApp')),
+              ),
+            ),
+            // _getScreen(),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.fire_truck),
-            label: 'Техника',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.subject),
-            label: 'Заказы',
-          ),
-                    BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Водители',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Профиль',
-          ),
-        ],
-               type: BottomNavigationBarType.fixed,      
-        currentIndex: _currentPage,
-        fixedColor: violetColor,
-        onTap: (int intIndex) {
-          setState(() {
-            _currentPage = intIndex;
-          });
-        },
       ),
     );
   }
@@ -155,20 +231,39 @@ class _showExitConfirmationDialog {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Выход'),
-          content: Text('Вы уверены, что хотите выйти?'),
+          title: const Text('Выход'),
+          content: const Text('Вы уверены, что хотите выйти?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Нет'),
+              child: const Text('Нет'),
               onPressed: () {
                 Navigator.of(context).pop(); // Закрыть диалоговое окно
               },
             ),
             TextButton(
-                child: Text('Да'),
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => LoginPage()));
+                child: const Text('Да'),
+                onPressed: () async {
+                  // Получение экземпляра SharedPreferences
+                  final prefs = await SharedPreferences.getInstance();
+
+// Логирование значения перед его удалением
+                  final token = prefs.getString('789456123');
+                  print('Token before deletion: $token');
+
+// Удаление токена, обернутое в try-catch для перехвата ошибок
+                  try {
+                    await prefs.remove('789456123');
+                    print('Token has been successfully removed.');
+
+                    // Дополнительная проверка для убеждения, что ключ был удален
+                    final tokenAfterDeletion = prefs.getString('789456123');
+                    print('Token after deletion: $tokenAfterDeletion');
+                  } catch (e) {
+                    print('Error removing token: $e');
+                  }
+
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const LoginPage()));
                 }),
           ],
         );

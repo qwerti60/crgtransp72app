@@ -12,7 +12,6 @@ class profil_transport extends StatefulWidget {
 
   @override
   profil_nameForm createState() => profil_nameForm();
-
 }
 
 class profil_nameForm extends State<profil_transport> {
@@ -29,7 +28,7 @@ class profil_nameForm extends State<profil_transport> {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image:
                       AssetImage("assets/images/bgcolor_head_green_white.png"),
@@ -47,8 +46,8 @@ class profil_nameForm extends State<profil_transport> {
             ),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              margin: EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              margin: const EdgeInsets.only(top: 5.0),
               child: const Text(
                 'Иван Иванов',
                 style: TextStyle(
@@ -61,68 +60,63 @@ class profil_nameForm extends State<profil_transport> {
             ),
             Container(
                 child: Center(
-                      
-child: SwitchListTile(
-        tileColor: whiteprColor,
-        activeColor: GreenColor,
-        title: const Text('Доступен для заказов'),
-        value: isSwitched,
-        onChanged: (bool? value) {
-          setState(() {
-            isSwitched = value!;
-          });
-        },
-      )
-                )),
+                    child: SwitchListTile(
+              tileColor: whiteprColor,
+              activeColor: GreenColor,
+              title: const Text('Доступен для заказов'),
+              value: isSwitched,
+              onChanged: (bool? value) {
+                setState(() {
+                  isSwitched = value!;
+                });
+              },
+            ))),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: TexticonsColor,
+                ),
+                onPressed: () {},
                 child: const Text('Транспорт'),
-                style: TextButton.styleFrom(
-                  foregroundColor: TexticonsColor,
-                ),
-                
-                onPressed: () {},
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: TextButton(
-                child: const Text('Mercedes'),
                 style: TextButton.styleFrom(
                   foregroundColor: TexticonsColor,
                 ),
                 onPressed: () {},
+                child: const Text('Mercedes'),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              margin: EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  child: const Text('Добавить транспорт'),
-                  style: TextButton.styleFrom(
-                    fixedSize: const Size(double.infinity, 50),
-                    foregroundColor: whiteprColor,
-                    backgroundColor: GreenColor,
-                    disabledForegroundColor: grayprprColor,
-                    shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(3))),
-                  ),
-                onPressed: () {
-                      }
-                ),
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(double.infinity, 50),
+                      foregroundColor: whiteprColor,
+                      backgroundColor: GreenColor,
+                      disabledForegroundColor: grayprprColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3))),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Добавить транспорт')),
               ),
-            ),            
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.fire_truck),
             label: 'Техника',
           ),
@@ -135,13 +129,13 @@ child: SwitchListTile(
             label: 'Профиль',
           ),
         ],
-                  currentIndex: _currentPage,
-          fixedColor: GreenColor,
-          onTap: (int intIndex) {
-            setState(() {
-              _currentPage = intIndex;
-            });
-          },
+        currentIndex: _currentPage,
+        fixedColor: GreenColor,
+        onTap: (int intIndex) {
+          setState(() {
+            _currentPage = intIndex;
+          });
+        },
       ),
     );
   }

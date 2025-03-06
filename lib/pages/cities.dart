@@ -5,6 +5,9 @@ import 'dart:convert';
 import '../config.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
   _RegisterPage createState() => _RegisterPage();
 }
 
@@ -53,15 +56,15 @@ class _RegisterPage extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select a City'),
+        title: const Text('Select a City'),
       ),
       body: _cities.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 DropdownButton(
-                  hint: Text('Select city'),
+                  hint: const Text('Select city'),
                   value: _selectedCity,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -86,7 +89,7 @@ class _RegisterPage extends State {
                                     NextScreen(city: _selectedCity!)),
                           );
                         },
-                  child: Text('Next'),
+                  child: const Text('Next'),
                 ),
               ],
             ),
@@ -97,13 +100,13 @@ class _RegisterPage extends State {
 class NextScreen extends StatelessWidget {
   final String city;
 
-  NextScreen({required this.city});
+  const NextScreen({super.key, required this.city});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selected City'),
+        title: const Text('Selected City'),
       ),
       body: Center(
         child: Text('You selected: $city'),
