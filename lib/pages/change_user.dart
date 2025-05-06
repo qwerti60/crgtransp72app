@@ -30,19 +30,24 @@ Future<bool?> checkSubscription(int userId) async {
 void navigateIfNeeded(BuildContext context, int userId) async {
   final subscriptionStatus = await checkSubscription(userId);
   if (subscriptionStatus == true) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const MyAppZakazScreen()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => MyAppZakazScreen()),
+      (Route<dynamic> route) => false,
+    );
+    //  Navigator.push(
+    //    context, MaterialPageRoute(builder: (_) => const MyAppZakazScreen()));
   } else if (subscriptionStatus == false) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Подписка"),
-          content:
-              Text("Ваша подписка неактивна. Оформите подписку для доступа."),
+          title: const Text("Подписка"),
+          content: const Text(
+              "Ваша подписка неактивна. Оформите подписку для доступа."),
           actions: [
             TextButton(
-              child: Text("Оформить"),
+              child: const Text("Оформить"),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -154,8 +159,13 @@ class change_userForm extends State<change_user> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    navigateIfNeeded(context,
-                        userId); // предполагается, что userId уже объявлен и доступен
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => MyApp()),
+                      (Route<dynamic> route) => false,
+                    );
+                    //                  Navigator.push(context,
+                    //                    MaterialPageRoute(builder: (_) => const MyApp()));
                   },
                   child: const Text('Я заказчик'),
                 ),
@@ -176,8 +186,8 @@ class change_userForm extends State<change_user> {
                         borderRadius: BorderRadius.all(Radius.circular(3))),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const MyApp()));
+                    navigateIfNeeded(context,
+                        userId); // предполагается, что userId уже объявлен и доступен
                   },
                   child: const Text('Я исполнитель'),
                 ),

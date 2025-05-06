@@ -1,12 +1,14 @@
 import 'dart:typed_data';
 
+import 'package:crgtransp72app/pages/outputobzlikes.dart';
+import 'package:crgtransp72app/pages/outputobzlikes1.dart';
+import 'package:crgtransp72app/pages/subscription_screen.dart';
+import 'package:crgtransp72app/pages/zakaz_screen2.dart';
+
 import '../design/colors.dart';
-import 'ads1.dart';
 import 'ads2.dart';
 import 'loginpage.dart';
 import 'rent_z.dart';
-import 'subscription_screen.dart';
-import 'zakaz_screen.dart';
 import 'zprofil_ld.dart';
 import 'zprofil_zakaz.dart';
 import 'zprofile_izbrannoe.dart';
@@ -37,6 +39,61 @@ class zprofil_nameForm extends State<zprofil_name> {
   void initState() {
     super.initState();
     getUserData();
+  }
+
+  Future<bool?> checkSubscription(int userId) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://ivnovav.ru/api/check_subscription.php?iduser=$userId'), // Adding userId as a query parameter
+      // Note: Since you are sending the userId in the URL, you do not need to include it in the body again
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print(data['status']);
+      if (data['status'] == 'active') {
+        return true;
+      } else if (data['status'] == 'expired' || data['status'] == 'not_found') {
+        return false;
+      }
+    }
+    return null; // It might be good to return null or handle errors if the response status code isn't 200, indicating an issue with the request
+  }
+
+  void navigateIfNeeded(BuildContext context, int userId) async {
+    final subscriptionStatus = await checkSubscription(userId);
+    if (subscriptionStatus == true) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => MyAppZakazScreen()),
+        (Route<dynamic> route) => false,
+      );
+      //  Navigator.push(
+      //    context, MaterialPageRoute(builder: (_) => const MyAppZakazScreen()));
+    } else if (subscriptionStatus == false) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Подписка"),
+            content: const Text(
+                "Ваша подписка неактивна. Оформите подписку для доступа."),
+            actions: [
+              TextButton(
+                child: const Text("Оформить"),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const SubscriptionScreen()));
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    // Здесь может быть ваша логика перехода на экран оформления/продления подписки
   }
 
   Future<void> getUserData() async {
@@ -106,10 +163,21 @@ class zprofil_nameForm extends State<zprofil_name> {
                       ? Image.memory(
                           fotouser!,
                           // fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print('Ошибка при загрузке изображения: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         )
                       : Image.asset(
                           'assets/images/fotouser.png',
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print(
+                                'Ошибка при загрузке изображения из ассетов: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         ),
                 ),
               ),
@@ -180,7 +248,8 @@ class zprofil_nameForm extends State<zprofil_name> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const zprofile_izbrannoe()));
+                            builder: (_) =>
+                                const outputobzlikes(nameImg: '', base: 1)));
                   },
                   child: const Text('Избранное')),
             ),
@@ -202,19 +271,20 @@ class zprofil_nameForm extends State<zprofil_name> {
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => RentDateForm()));
-                    },
-                    child: const Text('MyApp')),
+                  style: TextButton.styleFrom(
+                    fixedSize: const Size(double.infinity, 50),
+                    foregroundColor: whiteprColor,
+                    backgroundColor: blueaccentColor,
+                    disabledForegroundColor: grayprprColor,
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(3))),
+                  ),
+                  onPressed: () {
+                    navigateIfNeeded(context,
+                        userId); // предполагается, что userId уже объявлен и доступен
+                  },
+                  child: const Text('Стать исполнителем'),
+                ),
               ),
             ),
             // _getScreen(),

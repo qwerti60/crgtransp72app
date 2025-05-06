@@ -1,5 +1,6 @@
 import 'package:crgtransp72app/config.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../design/colors.dart';
 import '../design/dimension.dart';
@@ -32,6 +33,16 @@ class creguser3name extends StatefulWidget {
 
   @override
   _CregUser3NameState createState() => _CregUser3NameState();
+}
+
+void _launchURL() async {
+  const url =
+      'https://ivnovav.ru/api/agreement.html'; // Укажите здесь URL вашего пользовательского соглашения
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Не могу открыть $url';
+  }
 }
 
 class _CregUser3NameState extends State<creguser3name> {
@@ -193,7 +204,9 @@ class _CregUser3NameState extends State<creguser3name> {
                 controlAffinity: ListTileControlAffinity.leading,
                 contentPadding: EdgeInsets.zero, // Убираем отступ, если нужно
                 title: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL();
+                  },
                   child: const Text(
                     "Принять пользовательское соглашение",
                     style: TextStyle(

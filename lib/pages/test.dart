@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyAppImg());
+  runApp(const MyAppImg());
 }
 
 class MyAppImg extends StatelessWidget {

@@ -16,21 +16,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+//    final token  =getSecureToken();
     _startTimer();
   }
 
-  void _startTimer() {
-    final token = getSecureToken(); // Await the secure token7
+  Future<void> _startTimer() async {
+    final token = await getSecureToken(); // Await the secure token
     Timer(const Duration(seconds: 5), () {
-      //Navigator.of(context).pushReplacement(
-      //  MaterialPageRoute(builder: (context) => const LoginPage()));
+      print('token');
+      print(token);
+      //    final token = getSecureToken(); // Await the secure token7
+
       if (token == null) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
+            MaterialPageRoute(builder: (context) => const LoginPage()));
       } else {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => change_user()),
+          MaterialPageRoute(builder: (context) => const change_user()),
         );
       }
     });

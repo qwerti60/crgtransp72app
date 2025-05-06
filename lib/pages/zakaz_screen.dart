@@ -1,9 +1,9 @@
+import 'package:crgtransp72app/pages/zprofil_page.dart';
 import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 import 'get_vt.dart';
 import 'vod_zak.dart';
-import 'zprofil_page.dart';
 import 'zprofil_page2.dart';
 import 'zprofil_zakaz.dart';
 
@@ -42,7 +42,7 @@ class _MyCustomScreenState extends State {
       case 2:
         return const vod_zak(); //водители
       case 3:
-        return const zprofil_name2();
+        return const zprofil_name();
       default:
         return const MyAppI1(); // Теперь исправлено на правильный вызов
     }

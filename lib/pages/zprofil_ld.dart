@@ -327,11 +327,22 @@ class zprofil_ldForm extends State<zprofil_ld> {
                   child: fotouser != null
                       ? Image.memory(
                           fotouser!,
-                          fit: BoxFit.cover,
+                          // fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print('Ошибка при загрузке изображения: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         )
                       : Image.asset(
                           'assets/images/fotouser.png',
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print(
+                                'Ошибка при загрузке изображения из ассетов: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         ),
                 ),
               ),

@@ -3,12 +3,10 @@
 import 'dart:convert';
 
 import 'package:crgtransp72app/design/colors.dart';
-import 'package:crgtransp72app/pages/ads1.dart';
 import 'package:flutter/material.dart';
 
 import '../config.dart';
 import '../design/dimension.dart';
-import '111.dart';
 import 'change_user.dart';
 import 'changestatis_page.dart';
 import 'gruz_vodit.dart';
@@ -204,8 +202,10 @@ class _LoginState extends State<LoginPage> {
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => RentDateForm()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const RentDateForm()));
                     },
                     child: const Text('объявы')),
               ),

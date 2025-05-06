@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:crgtransp72app/pages/changerol_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -136,7 +137,7 @@ class _MyHomePageState extends State {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Мои объявления',
+          'Мои заявки',
           style: TextStyle(
             color: whiteprColor,
           ),
@@ -544,7 +545,7 @@ class _MyHomePageState extends State {
 
         ///initState();
         setState(() {
-          fetchAds(bd!);
+          fetchAds(bd);
         });
       } else {
         // Ошибка, можно показать сообщение об ошибке

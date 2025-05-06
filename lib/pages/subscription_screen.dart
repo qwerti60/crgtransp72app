@@ -118,7 +118,7 @@ class SubscriptionForm extends State<SubscriptionScreen> {
                             // Преобразование строки в DateTime с проверкой
                             DateTime parsedDate = DateTime.tryParse(
                                     snapshot.data) ??
-                                DateTime.now().add(Duration(
+                                DateTime.now().add(const Duration(
                                     days:
                                         -1)); // Если не удастся разобрать строку, используется "невалидная" дата, чтобы кнопка была неактивной.
                             // Проверка, если дата не более 30 дней назад, то кнопка активна
@@ -127,8 +127,7 @@ class SubscriptionForm extends State<SubscriptionScreen> {
                               _showRenewSubscriptionDialog(context);
                             }
                           }
-                        : null, // Кнопка будет неактивной, если условие не выполнено
-                    child: Text('Продлить подписку'),
+                        : null,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       disabledForegroundColor: Colors.grey.withOpacity(0.38),
@@ -136,7 +135,8 @@ class SubscriptionForm extends State<SubscriptionScreen> {
                           0.12), // Используйте корректную переменную для белого цвета
                       backgroundColor: Colors
                           .blueAccent, // Используйте корректную переменную для цвета акцента
-                    ),
+                    ), // Кнопка будет неактивной, если условие не выполнено
+                    child: const Text('Продлить подписку'),
                   ),
                 ),
               ],
@@ -152,8 +152,9 @@ class SubscriptionForm extends State<SubscriptionScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Продлить подписку'),
-          content: Text('Вы уверены, что хотите продлить подписку на 30 дней?'),
+          title: const Text('Продлить подписку'),
+          content: const Text(
+              'Вы уверены, что хотите продлить подписку на 30 дней?'),
           actions: <Widget>[
             TextButton(
               onPressed: () async {
@@ -169,13 +170,13 @@ class SubscriptionForm extends State<SubscriptionScreen> {
                   print(e); // Выводим ошибку, если что-то пошло не так
                 }
               },
-              child: Text('Да'),
+              child: const Text('Да'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Просто закрывает диалоговое окно
               },
-              child: Text('Нет'),
+              child: const Text('Нет'),
             ),
           ],
         );

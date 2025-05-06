@@ -34,7 +34,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
   String? _selectedVidkuzov;
   List _cities = [];
   String? _selectedCity;
-  List _cities1 = [];
+  final List _cities1 = [];
   String? _selectedCity1;
   List _gp = [];
   String? _selectedGP;
@@ -42,12 +42,12 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
   String? selectedValue;
   String strData = '';
   String city = '';
-  List _zp = [];
-  List _tp = [];
-  String? _dropdownValueTypePer =
+  final List _zp = [];
+  final List _tp = [];
+  final String _dropdownValueTypePer =
       'Не знаю'; // Убедитесь, что это значение совпадает с одним из элементов в items
-  String? _dropdownValueZagr = 'Не знаю';
-  String? _dropdownValueGruzch = 'Без грузчиков';
+  final String _dropdownValueZagr = 'Не знаю';
+  final String _dropdownValueGruzch = 'Без грузчиков';
   final List _images = List.generate(4, (index) => null);
   final List _imagesDoc = [null, null, null, null]; // Список для хр
   final List<XFile?> _originalImages = List.generate(4, (index) => null);
@@ -298,11 +298,6 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
             .add(await http.MultipartFile.fromPath('img${i + 1}', filePath));
       }
     }
-
-    print(_dropdownValueGruzch);
-    print(selectedDatez);
-    print(_selectedVidt);
-    print(_selectedCity);
     var response = await request.send();
 
     if (response.statusCode == 200) {
@@ -357,10 +352,11 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
         initialDate: selectedDatez,
         firstDate: DateTime(2025),
         lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDatez)
+    if (picked != null && picked != selectedDatez) {
       setState(() {
         selectedDatez = picked;
       });
+    }
   }
 
   @override
@@ -482,7 +478,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                           dropdownColor: grayprprColor,
                           value: _selectedCity,
                           isExpanded: true,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           onChanged: (String? newValue) {
                             setState(() {
                               _selectedCity = newValue;
@@ -535,7 +531,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                   DropdownButton(
                     hint: Text(
                       _selectedOption ?? 'Выберите опцию',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black38,
                         fontSize: 16.0,
@@ -544,7 +540,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                     dropdownColor: grayprprColor,
                     value: _selectedOption,
                     isExpanded: true,
-                    underline: SizedBox(),
+                    underline: const SizedBox(),
                     onChanged: (String? newValue) {
                       setState(() {
                         _selectedOption = newValue;
@@ -552,7 +548,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                         _endDate = null;
                       });
                     },
-                    items: [
+                    items: const [
                       DropdownMenuItem(
                         value: 'Как можно быстрее',
                         child: Text(
@@ -598,7 +594,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                                 _startDate == null
                                     ? 'Выберите начальную дату'
                                     : 'Начало: ${_dateFormat.format(_startDate!)}',
-                                style: TextStyle(color: Colors.black38)),
+                                style: const TextStyle(color: Colors.black38)),
                             onTap: () => _selectDate(context, isStart: true),
                           ),
                         ),
@@ -608,7 +604,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                                 _endDate == null
                                     ? 'Выберите конечную дату'
                                     : 'Конец: ${_dateFormat.format(_endDate!)}',
-                                style: TextStyle(color: Colors.black38)),
+                                style: const TextStyle(color: Colors.black38)),
                             onTap: () => _selectDate(context, isStart: false),
                           ),
                         ),
@@ -620,7 +616,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                           _endDate == null
                               ? 'Выберите дату'
                               : 'Не позднее: ${_dateFormat.format(_endDate!)}',
-                          style: TextStyle(color: Colors.black38)),
+                          style: const TextStyle(color: Colors.black38)),
                       onTap: () => _selectDate(context, isStart: false),
                     ),
                 ],
@@ -631,7 +627,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
-                'Бюдбжет до',
+                'Бюджет до',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black38,
@@ -688,8 +684,8 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                 keyboardType:
                     TextInputType.multiline, // Делаем поле многострочным
                 maxLines: null, // Без ограничения на количество строк
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                   border: InputBorder.none, // Убираем внутреннюю рамку
                   // Добавьте другие настройки декорации здесь, если это необходимо
                 ),
@@ -716,7 +712,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl_t> {
                     selectedDatez == null
                         ? 'Выберите дату'
                         : 'Прием заявок до: ${_dateFormat.format(selectedDatez)}',
-                    style: TextStyle(color: Colors.black38)),
+                    style: const TextStyle(color: Colors.black38)),
                 onTap: () => _selectDatez(context),
               ),
             ),

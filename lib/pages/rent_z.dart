@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(MaterialApp(home: RentDateForm()));
+  runApp(const MaterialApp(home: RentDateForm()));
 }
 
 class RentDateForm extends StatefulWidget {
+  const RentDateForm({super.key});
+
   @override
   _RentDateFormState createState() => _RentDateFormState();
 }
@@ -44,7 +46,7 @@ class _RentDateFormState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Выберите дату аренды'),
+        title: const Text('Выберите дату аренды'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -59,7 +61,7 @@ class _RentDateFormState extends State {
                   _endDate = null;
                 });
               },
-              items: [
+              items: const [
                 DropdownMenuItem(
                     value: 'Как можно быстрее',
                     child: Text('Как можно быстрее')),

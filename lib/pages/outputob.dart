@@ -1,15 +1,16 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:crgtransp72app/pages/changerol_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../config.dart';
 import '../design/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'changerol_page.dart';
-import '../config.dart';
 
 void main() {
   runApp(const outputob(
@@ -62,6 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
   String city = '';
   String phone = '';
   String email = '';
+  String namefirm = '';
+  String innStr = '';
+  String ogrnStr = '';
+  String kppStr = '';
 
   @override
   void initState() {
@@ -70,8 +75,41 @@ class _MyHomePageState extends State<MyHomePage> {
     String nameImg = widget.nameImg;
     bd ??= 1;
     //super.initState();
-    //   getUserData();
+    getUserData();
     fetchAds(bd!, nameImg);
+  }
+
+  int userId = 0;
+  Future<void> getUserData() async {
+    final token = await getSecureToken(); // Await the secure token
+    if (token == null) {
+      print("Token is null");
+      return;
+    }
+    final response = await http
+        .get(Uri.parse('https://ivnovav.ru/api/getuserinfo.php?token=$token'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['error'] != null) {
+        print('Ошибка: ${data['error']}');
+      } else {
+        // Обновляем поля класса и UI
+        setState(() {
+          userId = data['idusers'];
+        });
+        print('вывод id: $userId');
+        // Теперь переменные firstName, lastName, middleName доступны для использования в build() методе
+      }
+    } else {
+      print('Ошибка при получении данных пользователя');
+    }
+  }
+
+  Future<String?> getSecureToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('789456123'); // Получаем токен
+    return token;
   }
 
   Future<void> getUserDataAds(idUser) async {
@@ -93,7 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
           city = data['city'] ?? "Нет города";
           phone = data['phone'] ?? "Нет телефона";
           email = data['email'] ?? "Нет email";
-          print(firstName);
+          namefirm = data['namefirm'] ?? "Нет назвония фирмы";
+          innStr = data['innStr'] ?? "Нет ИНН";
+          ogrnStr = data['ogrnStr'] ?? "Нет ОГРН";
+          kppStr = data['kppStr'] ?? "Нет КПП";
+          print(namefirm);
         });
 
         // Теперь переменные firstName, lastName, middleName доступны для использования в build() методе
@@ -108,6 +150,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Uri.parse(Config.baseUrl).replace(
         path: '/api/get_ads2.php',
         queryParameters: {
+          'usersid': userId.toString(),
+          'idusers': idUser,
           'nameImg': nameImg,
           'bd': bd
               .toString(), // Добавляем переменную bd как строку в параметры запроса
@@ -120,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       try {
         final parsed = json.decode(response.body);
-        print(parsed);
+        print('666');
+        print(idUser);
         return parsed;
 
         //getUserDataAds(idusers1);
@@ -141,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Мои объявления',
+          'Исполнители',
           style: TextStyle(
             color: whiteprColor,
           ),
@@ -153,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           // Действие, производимое при нажатии на кнопку
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const changerol()));
+              MaterialPageRoute(builder: (context) => const changerol1()));
           print('Нажата плавающая кнопка');
         },
         backgroundColor:
@@ -199,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(value),
                 );
               }).toList(),
-              hint: const Text("Выберите тип"),
+              hint: const Text("Выберите вид исполнителя"),
             ),
           ),
 
@@ -227,7 +272,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemCount: snapshot.data?.length,
                       itemBuilder: (context, index) {
                         var truck = snapshot.data![index];
-
+                        if (truck == null)
+                          Text(
+                            'В этом разделе нет объявлений',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          );
                         List<Uint8List> images = [];
 
                         // Добавляем изображения в список images, только если они не null
@@ -243,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           }
                         }
                         String base64Stringf = '';
-                        Uint8List? truckImage = null;
+                        Uint8List? truckImage;
                         bool isLiked = false; // Состояние кнопки like
                         // Проверяем существует ли изображение fotouser
                         if (truck['fotouser'] != null) {
@@ -258,7 +307,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                           children: [
                             Container(
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                 top: 10, // Отступ сверху
                                 bottom: 10, // Отступ снизу
                               ),
@@ -290,17 +339,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                         .center, // Выравнивание по центру
                                     children: <Widget>[
                                       IconButton(
-                                        icon: Icon(isLiked
-                                            ? Icons.favorite
-                                            : Icons
-                                                .favorite_border), // Смена иконки
-                                        color: isLiked
-                                            ? Colors.red
-                                            : Colors.black, // Смена цвета
-                                        onPressed: () {
+                                        icon: Icon(
+                                          truck['success'] == 'true'
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: truck['success'] == 'true'
+                                              ? Colors.red
+                                              : Colors.grey,
+                                        ),
+                                        onPressed: () async {
+                                          await toggleLike(truck['iduser'],
+                                              truck['id'], bd!);
+                                          print(truck['success']);
                                           setState(() {
-                                            isLiked =
-                                                !isLiked; // Смена состояния при нажатии
+                                            // После асинхронной операции обновляем UI
                                           });
                                         },
                                       ),
@@ -311,19 +363,25 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(Icons.phone), // Иконка телефона
-                                      SizedBox(
-                                          width:
-                                              4), // небольшой промежуток между иконкой и текстом
-                                      Text(
-                                        '${truck['phone']}', // текст, допустим, номер телефона
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                  GestureDetector(
+                                    onTap: () {
+                                      _makePhoneCall(truck['phone']);
+                                    },
+                                    child: Row(
+                                      children: <Widget>[
+                                        const Icon(
+                                            Icons.phone), // Иконка телефона
+                                        const SizedBox(
+                                            width:
+                                                4), // небольшой промежуток между иконкой и текстом
+                                        Text(
+                                          '${truck['phone']}', // текст, допустим, номер телефона
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
@@ -351,6 +409,91 @@ class _MyHomePageState extends State<MyHomePage> {
                                       1.0, // Уже установлено, позволяет заполнить всю доступную ширину
                                   aspectRatio:
                                       2.0, // Можно адаптировать в зависимости от желаемых пропорций
+                                ),
+                              ),
+                            if (truck['namefirm'] == null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('Частное лицо',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                            if (truck['namefirm'] != null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Компания:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('${truck['namefirm']}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                            if (truck['innStr'] != null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('ИНН:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('${truck['innStr']}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                            if (truck['ogrnStr'] != null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('ОГРН:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('${truck['ogrnStr']}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                            if (truck['kppStr'] != null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('КПП:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('${truck['kppStr']}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
                                 ),
                               ),
                             if (truck['marka'] != null)
@@ -574,6 +717,58 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  bool isLiked = false;
+  Future<bool> toggleLike(String idUser, String id, int bd) async {
+    //   final response = await http.get(Uri.parse(
+    //     'http://yourdomain.com/toggle_like.php?idusers=$idUser&id=$id&bd=$bd'));
+    final response = await http.get(
+      Uri.parse(Config.baseUrl).replace(
+        path: '/api/toggle_like1.php',
+        queryParameters: {
+          'usersid': userId.toString(),
+          'idusers': idUser,
+          'id': id,
+          'bd': bd
+              .toString(), // Добавляем переменную bd как строку в параметры запроса
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      if (response.body.isEmpty) {
+        throw Exception('Пустой ответ от сервера');
+      }
+      try {
+        final parsed = json.decode(response.body);
+        isLiked = parsed['success'];
+        print('7777');
+        print(userId);
+        return isLiked;
+
+        //getUserDataAds(idusers1);
+      } catch (e) {
+        print('Ошибка декодирования: $e');
+        print('Ответ сервера: ${response.body}');
+        throw Exception('Ошибка формата ответа');
+      }
+      // Это излишне, поскольку возвращение происходит в блоке try выше
+      // return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load ads');
+    }
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not launch $launchUri';
+    }
   }
 
   Future<void> showDeleteDialog(BuildContext context, int truckId) async {

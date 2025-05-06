@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:crgtransp72app/pages/changerol_page.dart';
+import 'package:crgtransp72app/pages/changerol_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -7,8 +9,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../config.dart';
 import '../design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'changerol_page.dart';
 
 void main() {
   runApp(const Ads2App());
@@ -136,7 +136,7 @@ class _MyHomePageState extends State {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Мои заказы',
+          'Мои объявления',
           style: TextStyle(
             color: whiteprColor,
           ),
@@ -148,7 +148,7 @@ class _MyHomePageState extends State {
         onPressed: () {
           // Действие, производимое при нажатии на кнопку
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const changerol()));
+              MaterialPageRoute(builder: (context) => const changerol1()));
           print('Нажата плавающая кнопка');
         },
         backgroundColor:
@@ -279,23 +279,22 @@ class _MyHomePageState extends State {
                                       2.0, // Можно адаптировать в зависимости от желаемых пропорций
                                 ),
                               ),
-                            if (truck['maxgruz'] != null)
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Создано :',
-                                        style:
-                                            DefaultTextStyle.of(context).style),
-                                    Text('${truck['created_at']}',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Создано :',
+                                      style:
+                                          DefaultTextStyle.of(context).style),
+                                  Text('${truck['created_at']}',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                ],
                               ),
+                            ),
                             if (truck['vidt'] != null)
                               Padding(
                                 padding:
@@ -395,8 +394,8 @@ class _MyHomePageState extends State {
                                     Text('Дата погрузки:',
                                         style:
                                             DefaultTextStyle.of(context).style),
-                                    Text('Как можно быстрее',
-                                        style: const TextStyle(
+                                    const Text('Как можно быстрее',
+                                        style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   ],
                                 ),
@@ -555,6 +554,52 @@ class _MyHomePageState extends State {
                                   ],
                                 ),
                               ),
+                            if ((truck['offer'] != null) &&
+                                (truck['offer'] != '0'))
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Откликов:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Здесь добавьте действие при нажатии на кнопку
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            blueaccentColor, // Это сделает кнопку синей
+                                      ),
+                                      child: Text('${truck['offer']}',
+                                          style: const TextStyle(
+                                            color: whiteprColor,
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if ((truck['offer'] != null) &&
+                                (truck['offer'] == '0'))
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Откликов:',
+                                        style:
+                                            DefaultTextStyle.of(context).style),
+                                    Text('${truck['offer']}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
                           ],
                         );
                       });
@@ -618,7 +663,7 @@ class _MyHomePageState extends State {
 
         ///initState();
         setState(() {
-          fetchAds(bd!);
+          fetchAds(bd);
         });
       } else {
         // Ошибка, можно показать сообщение об ошибке

@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:crgtransp72app/pages/outputobzlikes.dart';
+import 'package:crgtransp72app/pages/outputobzlikes1.dart';
+
 import '../design/colors.dart';
 import 'ads1.dart';
 import 'loginpage.dart';
@@ -104,10 +107,21 @@ class zprofil_nameForm extends State<zprofil_name2> {
                       ? Image.memory(
                           fotouser!,
                           // fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print('Ошибка при загрузке изображения: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         )
                       : Image.asset(
                           'assets/images/fotouser.png',
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            print(
+                                'Ошибка при загрузке изображения из ассетов: $error');
+                            // Возвращает виджет, который отображается в случае ошибки
+                            return Icon(Icons.error);
+                          },
                         ),
                 ),
               ),
@@ -150,7 +164,7 @@ class zprofil_nameForm extends State<zprofil_name2> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => const Ads1App()));
                   },
-                  child: const Text('Мои объявления')),
+                  child: const Text('Мои заявки')),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -178,7 +192,8 @@ class zprofil_nameForm extends State<zprofil_name2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const zprofile_izbrannoe()));
+                            builder: (_) =>
+                                const outputobzlikes1(nameImg: '', base: 1)));
                   },
                   child: const Text('Избранное')),
             ),
@@ -214,19 +229,25 @@ class zprofil_nameForm extends State<zprofil_name2> {
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(double.infinity, 50),
-                      foregroundColor: whiteprColor,
-                      backgroundColor: blueaccentColor,
-                      disabledForegroundColor: grayprprColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(3))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => const MyApp()));
-                    },
-                    child: const Text('MyApp')),
+                  style: TextButton.styleFrom(
+                    fixedSize: const Size(double.infinity, 50),
+                    foregroundColor: whiteprColor,
+                    backgroundColor: blueaccentColor,
+                    disabledForegroundColor: grayprprColor,
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(3))),
+                  ),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => MyApp()),
+                      (Route<dynamic> route) => false,
+                    );
+                    //                  Navigator.push(context,
+                    //                    MaterialPageRoute(builder: (_) => const MyApp()));
+                  },
+                  child: const Text('Стать заказчиком'),
+                ),
               ),
             ),
             // _getScreen(),

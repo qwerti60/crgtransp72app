@@ -1,8 +1,9 @@
+import 'package:crgtransp72app/pages/get_vt_z.dart';
+import 'package:crgtransp72app/pages/zprofil_page2.dart';
 import 'package:flutter/material.dart';
 
 import '../design/colors.dart';
 import 'get_vt.dart';
-import 'get_vt1.dart';
 import 'vod_zak.dart';
 import 'zprofil_page.dart';
 import 'zprofil_zakaz.dart';
@@ -36,13 +37,13 @@ class _MyCustomScreenState extends State {
     switch (_currentPage) {
       case 0:
 // Вместо возвращения MyApp, возможно, вы захотите показать другой стартовый экран
-        return const MyAppI11(); // Поменяйте это на подходящий виджет
+        return const MyAppI1z(); // Поменяйте это на подходящий виджет
       case 1:
         return const zprofil_zakaz(); //заказы
       case 2:
         return const vod_zak(); //водители
       case 3:
-        return const zprofil_name();
+        return const zprofil_name2();
       default:
         return const MyAppI1(); // Теперь исправлено на правильный вызов
     }

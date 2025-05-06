@@ -14,7 +14,6 @@ import 'package:path/path.dart' as p;
 import 'package:file_picker/file_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
-import 'ads1.dart';
 import 'ads2.dart';
 
 class add_ob_gp_usl extends StatefulWidget {
@@ -35,19 +34,19 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
   String? _selectedVidkuzov;
   List _cities = [];
   String? _selectedCity;
-  List _cities1 = [];
+  final List _cities1 = [];
   String? _selectedCity1;
   List _gp = [];
   String? _selectedGP;
   String? selectedValue;
   String strData = '';
   String city = '';
-  List _zp = [];
-  List _tp = [];
+  final List _zp = [];
+  final List _tp = [];
   String? _dropdownValueTypePer =
       'Не знаю'; // Убедитесь, что это значение совпадает с одним из элементов в items
   String? _dropdownValueZagr = 'Не знаю';
-  String? _dropdownValueGruzch = 'Без грузчиков';
+  final String _dropdownValueGruzch = 'Без грузчиков';
   final List _images = List.generate(4, (index) => null);
   final List _imagesDoc = [null, null, null, null]; // Список для хр
   final List<XFile?> _originalImages = List.generate(4, (index) => null);
@@ -284,7 +283,6 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
       ..fields['enddate'] = _endDate.toString()
       ..fields['city1'] = _selectedCity1!
       ..fields['vidk'] = _selectedVidkuzov!
-      ..fields['gruzch'] = _dropdownValueGruzch!
       ..fields['zagr'] = _dropdownValueZagr!
       ..fields['typeper'] = _dropdownValueTypePer!
       ..fields['cena'] = _cenakmController.text
@@ -362,10 +360,11 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
         initialDate: selectedDatez,
         firstDate: DateTime(2025),
         lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDatez)
+    if (picked != null && picked != selectedDatez) {
       setState(() {
         selectedDatez = picked;
       });
+    }
   }
 
   @override
@@ -424,7 +423,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                           dropdownColor: grayprprColor,
                           value: _selectedGP,
                           isExpanded: true,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           onChanged: (String? newValue) {
                             setState(() {
                               _selectedGP = newValue;
@@ -487,7 +486,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                           dropdownColor: grayprprColor,
                           value: _selectedCity,
                           isExpanded: true,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           onChanged: (String? newValue) {
                             setState(() {
                               _selectedCity = newValue;
@@ -540,7 +539,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                   DropdownButton(
                     hint: Text(
                       _selectedOption ?? 'Выберите опцию',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black38,
                         fontSize: 16.0,
@@ -549,7 +548,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                     dropdownColor: grayprprColor,
                     value: _selectedOption,
                     isExpanded: true,
-                    underline: SizedBox(),
+                    underline: const SizedBox(),
                     onChanged: (String? newValue) {
                       setState(() {
                         _selectedOption = newValue;
@@ -557,7 +556,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                         _endDate = null;
                       });
                     },
-                    items: [
+                    items: const [
                       DropdownMenuItem(
                         value: 'Как можно быстрее',
                         child: Text(
@@ -603,7 +602,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                                 _startDate == null
                                     ? 'Выберите начальную дату'
                                     : 'Начало: ${_dateFormat.format(_startDate!)}',
-                                style: TextStyle(color: Colors.black38)),
+                                style: const TextStyle(color: Colors.black38)),
                             onTap: () => _selectDate(context, isStart: true),
                           ),
                         ),
@@ -613,7 +612,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                                 _endDate == null
                                     ? 'Выберите конечную дату'
                                     : 'Конец: ${_dateFormat.format(_endDate!)}',
-                                style: TextStyle(color: Colors.black38)),
+                                style: const TextStyle(color: Colors.black38)),
                             onTap: () => _selectDate(context, isStart: false),
                           ),
                         ),
@@ -625,7 +624,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                           _endDate == null
                               ? 'Выберите дату'
                               : 'Не позднее: ${_dateFormat.format(_endDate!)}',
-                          style: TextStyle(color: Colors.black38)),
+                          style: const TextStyle(color: Colors.black38)),
                       onTap: () => _selectDate(context, isStart: false),
                     ),
                 ],
@@ -670,7 +669,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                           dropdownColor: grayprprColor,
                           value: _selectedCity1,
                           isExpanded: true,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           onChanged: (String? newValue) {
                             setState(() {
                               _selectedCity1 = newValue;
@@ -733,7 +732,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                           dropdownColor: grayprprColor,
                           value: _selectedVidkuzov,
                           isExpanded: true,
-                          underline: SizedBox(),
+                          underline: const SizedBox(),
                           onChanged: (String? newValue) {
                             setState(() {
                               _selectedVidkuzov = newValue;
@@ -762,61 +761,6 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
-                'Грузчики',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                  fontSize: 16.0,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              margin: const EdgeInsets.only(top: 10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black38, width: 2),
-                color: grayprprColor,
-              ),
-              child: DropdownButton<String>(
-                hint: Text("Без грузчиков"),
-                value: _dropdownValueGruzch,
-                onChanged: (String? newValueg) {
-                  setState(() {
-                    _dropdownValueGruzch = newValueg;
-                  });
-                },
-                items: [
-                  'Без грузчиков',
-                  '1 грузчик',
-                  '2 грузчика',
-                  '3 грузчика',
-                ].map<DropdownMenuItem<String>>((String newValueg) {
-                  return DropdownMenuItem<String>(
-                    value: newValueg,
-                    child: Text(
-                      newValueg,
-                    ),
-                  );
-                }).toList(),
-                // Отключение подчеркивания по умолчанию
-                underline: SizedBox(),
-                // Адаптация стиля кнопки под контейнер
-                isExpanded: true,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                  fontSize: 16.0,
-                ),
-                dropdownColor: grayprprColor,
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              margin: const EdgeInsets.only(top: 15.0),
-              child: const Text(
                 'Тип перевозки',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -835,10 +779,10 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                 color: grayprprColor,
               ),
               child: DropdownButton<String>(
-                hint: Text("Не знаю"),
+                hint: const Text("Не знаю"),
                 value: _dropdownValueTypePer,
                 isExpanded: true,
-                underline: SizedBox(),
+                underline: const SizedBox(),
                 onChanged: (String? newValue) {
                   setState(() {
                     _dropdownValueTypePer = newValue;
@@ -884,10 +828,10 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                 color: grayprprColor,
               ),
               child: DropdownButton<String>(
-                hint: Text("Не знаю"),
+                hint: const Text("Не знаю"),
                 value: _dropdownValueZagr,
                 isExpanded: true,
-                underline: SizedBox(),
+                underline: const SizedBox(),
                 onChanged: (String? newValue) {
                   setState(() {
                     _dropdownValueZagr = newValue;
@@ -913,7 +857,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               margin: const EdgeInsets.only(top: 15.0),
               child: const Text(
-                'Бюдбжет до',
+                'Бюджет до',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black38,
@@ -970,8 +914,8 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                 keyboardType:
                     TextInputType.multiline, // Делаем поле многострочным
                 maxLines: null, // Без ограничения на количество строк
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                   border: InputBorder.none, // Убираем внутреннюю рамку
                   // Добавьте другие настройки декорации здесь, если это необходимо
                 ),
@@ -998,7 +942,7 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
                     selectedDatez == null
                         ? 'Выберите дату'
                         : 'Прием заявок до: ${_dateFormat.format(selectedDatez)}',
-                    style: TextStyle(color: Colors.black38)),
+                    style: const TextStyle(color: Colors.black38)),
                 onTap: () => _selectDatez(context),
               ),
             ),
