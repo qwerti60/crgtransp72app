@@ -32,6 +32,7 @@ dependencies:
   path: any
   shared_preferences: any
   path_provider: any
+  flutter_launcher_icons: ^0.14.3
   
 dev_dependencies:
   flutter_test:
@@ -46,3 +47,28 @@ flutter:
   assets:
    - assets/images/
    - assets/images/fotouser.png
+android:
+  app:
+    icons:
+      adaptive_icon_background: 'assets/images/icon.png'
+      adaptive_icon_foreground: 'assets/images/icon.png'
+
+flutter_launcher_icons:
+  android: "launcher_icon" # имя иконки для Android
+  ios: true # для iOS
+  image_path: "assets/images/icon/icon.png" # путь к вашей иконке
+  min_sdk_android: 21 # минимальная версия Android SDK
+  
+  # Дополнительные настройки (опционально):
+  adaptive_icon_background: "#ffffff" # цвет фона для адаптивных иконок Android
+  adaptive_icon_foreground: "assets/images/icon/icon_foreground.png" # передний план для адаптивных иконок
+  remove_alpha_ios: true # удалить прозрачность для iOS
+  web:
+    generate: true
+    image_path: "assets/images/icon/icon.png"
+  windows:
+    generate: true
+    image_path: "assets/images/icon/icon.png"
+  macos:
+    generate: true
+    image_path: "assets/images/icon/icon.png"      

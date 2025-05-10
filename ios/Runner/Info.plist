@@ -51,5 +51,7 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 <string>Это приложение требует доступа к вашей камере</string>
+	<key>CFBundleIconFile</key>
+    <string>AppIcon</string>
 </dict>
 </plist>
