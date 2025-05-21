@@ -107,6 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<bool> checkOfferExists(int userId, String truckId, int bd) async {
+    final response = await http.get(Uri.parse(
+        'https://ivnovav.ru/api/check_offer.php?iduser=$userId&truck=$truckId&bd=$bd'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body)['exists'];
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   Future<String?> getSecureToken() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('789456123'); // Получаем токен
@@ -733,35 +744,94 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                margin: const EdgeInsets.only(top: 20.0),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        fixedSize:
-                                            const Size(double.infinity, 50),
-                                        foregroundColor: whiteprColor,
-                                        backgroundColor: blueaccentColor,
-                                        disabledForegroundColor: grayprprColor,
-                                        shape: const BeveledRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(3))),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => OfferScreen(
-                                                userid: truck['id'], bd: bd),
+                                color: Colors.white, // По желанию добавьте фон
+                                padding: const EdgeInsets.all(
+                                    8.0), // Добавьте отступы вокруг FutureBuilder
+                                child: FutureBuilder<bool>(
+                                  future: checkOfferExists(
+                                      userId, truck['id'], bd!),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData && snapshot.data!) {
+                                      // Если запись существует
+                                      return Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        margin:
+                                            const EdgeInsets.only(top: 20.0),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              fixedSize: const Size(
+                                                  double.infinity, 50),
+                                              foregroundColor: whiteprColor,
+                                              backgroundColor: blueaccentColor,
+                                              disabledForegroundColor:
+                                                  grayprprColor,
+                                              shape:
+                                                  const BeveledRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(3)),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => OfferScreen(
+                                                      userid: truck['id'],
+                                                      bd: bd), // Изменение экрана
+                                                ),
+                                              );
+                                            },
+                                            child: const Text(
+                                                'Редактировать предложение'),
                                           ),
-                                        );
-                                      },
-                                      child:
-                                          const Text('Предложить свои услуги')),
+                                        ),
+                                      );
+                                    } else {
+                                      // Если записи нет
+                                      return Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        margin:
+                                            const EdgeInsets.only(top: 20.0),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              fixedSize: const Size(
+                                                  double.infinity, 50),
+                                              foregroundColor: whiteprColor,
+                                              backgroundColor: blueaccentColor,
+                                              disabledForegroundColor:
+                                                  grayprprColor,
+                                              shape:
+                                                  const BeveledRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(3)),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OfferScreen(
+                                                          userid: truck['id'],
+                                                          bd: bd),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text(
+                                                'Предложить свои услуги'),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
-                              ),
+                              )
                             ],
                           );
                         });

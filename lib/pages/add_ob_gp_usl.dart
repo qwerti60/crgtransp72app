@@ -330,25 +330,32 @@ class _add_ob_gpForm extends State<add_ob_gp_usl> {
 // Форматируем дату для отображения
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
 
-  Future _selectDate(BuildContext context, {required bool isStart}) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _selectDate(BuildContext context, {bool isStart = true}) async {
+    final now = DateTime.now(); // Текущая дата
+
+    final picked = await showDatePicker(
       context: context,
-      initialDate:
-          isStart ? _startDate ?? DateTime.now() : _endDate ?? DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
+      initialDate: isStart ? _startDate ?? now : _endDate ?? _startDate,
+      firstDate: isStart
+          ? now
+          : _startDate ??
+              now, // Если начальная дата есть, начинаем отсчёт с неё
+      lastDate: isStart
+          ? (_endDate ?? DateTime(2100))
+          : DateTime(
+              2100), // Лимитируем начальную дату конечной, если она задана
     );
-    if (picked != null) {
-      setState(() {
-        if (isStart) {
+
+    if (picked != null || (!isStart && _endDate != null)) {
+      if (isStart) {
+        setState(() {
           _startDate = picked;
-          if (_endDate != null && _endDate!.isBefore(_startDate!)) {
-            _endDate = _startDate;
-          }
-        } else {
+        });
+      } else {
+        setState(() {
           _endDate = picked;
-        }
-      });
+        });
+      }
     }
   }
 

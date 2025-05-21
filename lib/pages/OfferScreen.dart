@@ -36,12 +36,36 @@ class _OfferscreenForm extends State<OfferScreen> {
   final TextEditingController _aboutController = TextEditingController();
   late String userid; // Используйте правильные типы данных для вашей переменной
   late int bd;
+  int userIdp = 0;
   @override
   void initState() {
     super.initState();
     userid = widget.userid;
     bd = widget.bd;
     getUserData();
+    /////  checkOfferExists(userId, userIdp as String, bd);
+    fetchOfferData(userId, userid, bd);
+  }
+
+  Future<void> fetchOfferData(int iduserp, String userId, int bd) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://ivnovav.ru/api/fetch_offer.php'), // заменить на ваш сервер
+      body: {'iduserp': '$iduserp', 'userId': '$userId', 'bd': '$bd'},
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      _cenakmController.text = data['cena'] ?? '';
+      print(_cenakmController.text);
+      _aboutController.text = data['about'] ?? '';
+      print(_aboutController.text);
+    } else {
+      print('Ошибка загрузки данных');
+    }
+    print('вывод idp: $iduserp');
+    print('вывод id: $userId');
+    print('вывод bd: $bd');
   }
 
   String firstName = '';
@@ -50,7 +74,6 @@ class _OfferscreenForm extends State<OfferScreen> {
   String city1 = '';
   String phone = '';
   String email = '';
-  int userIdp = 0;
   Future<void> getUserData() async {
     final token = await getSecureToken(); // Await the secure token
     if (token == null) {
@@ -119,6 +142,17 @@ class _OfferscreenForm extends State<OfferScreen> {
     print('userid');
     print(userid);
     print(bd);
+  }
+
+  Future<bool> checkOfferExists(int userId, String truckId, int bd) async {
+    final response = await http.get(Uri.parse(
+        'https://ivnovav.ru/api/check_offer.php?iduser=$userId&truck=$truckId&bd=$bd'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body)['exists'];
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
 
   @override
